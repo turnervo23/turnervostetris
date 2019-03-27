@@ -22,7 +22,7 @@ Playfield::Playfield() {
 	nextBlockClip.w = 160;
 	nextBlockClip.h = 336;
 
-	heldBlockClip.x = x - 8 - 136;
+	heldBlockClip.x = x - 8 - 160;
 	heldBlockClip.y = y - 8;
 	heldBlockClip.w = 160;
 	heldBlockClip.h = 72;

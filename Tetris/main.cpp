@@ -7,7 +7,8 @@ First finished version should have at least:
 Then I can start adding more stuff.
 
 What's next on the agenda?
-- Render old block
+- Ghost piece
+- Autorepeat
 - Track lines cleared, later score
 - Speed up as more lines are cleared
 - Many, many small but important technical details - rotation limit, ghost piece, autorepeat etc.
