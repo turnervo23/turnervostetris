@@ -522,11 +522,14 @@ void Player::holdBlock() {
 	}
 }
 
+//Render ghost block at the playfield floor with 50% transparency
 void Player::renderGhostBlock() {
 	int tempY = y; //save player's actual position
 	while (!isTouchingGround()) {
 		y += 1;
 	}
+	playfield->textures[type].setAlpha(127);
 	render();
+	playfield->textures[type].setAlpha(255);
 	y = tempY;
 }

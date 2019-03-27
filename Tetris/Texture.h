@@ -21,6 +21,7 @@ public:
 	void free();
 	void render(int x, int y);
 	void render(int x, int y, int w, int h);
+	void setAlpha(int alpha);
 private:
 	SDL_Texture* texture; //actual texture
 	int width, height;

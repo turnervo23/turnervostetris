@@ -7,7 +7,6 @@ First finished version should have at least:
 Then I can start adding more stuff.
 
 What's next on the agenda?
-- Ghost piece
 - Autorepeat
 - Track lines cleared, later score
 - Speed up as more lines are cleared

@@ -29,6 +29,9 @@ bool Texture::loadFromFile(std::string path){
 		printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 	}
 
+	//Set standard alpha blending
+	SDL_SetTextureBlendMode(newTexture, SDL_BLENDMODE_BLEND);
+
 	//Get image dimensions
 	width = loadedSurface->w;
 	height = loadedSurface->h;
@@ -80,4 +83,9 @@ void Texture::render(int x, int y) {
 void Texture::render(int x, int y, int w, int h) {
 	SDL_Rect renderQuad = { x, y, w, h };
 	SDL_RenderCopy(gRenderer, texture, NULL, &renderQuad);
+}
+
+//Set alpha of texture
+void Texture::setAlpha(int alpha) {
+	SDL_SetTextureAlphaMod(texture, alpha);
 }
