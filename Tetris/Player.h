@@ -48,6 +48,7 @@ private:
 	void getNextBlock();
 	void renderNextBlocks();
 	void renderHeldBlock();
+	void renderGhostBlock();
 	bool isTouchingGround();
 	void applyLock();
 	void landBlock();

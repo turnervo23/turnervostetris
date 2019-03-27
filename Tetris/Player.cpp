@@ -211,6 +211,7 @@ void Player::update() {
 	render();
 	renderNextBlocks();
 	renderHeldBlock();
+	renderGhostBlock();
 }
 
 //Automatically move player down
@@ -519,4 +520,13 @@ void Player::holdBlock() {
 
 		holdUsed = true;
 	}
+}
+
+void Player::renderGhostBlock() {
+	int tempY = y; //save player's actual position
+	while (!isTouchingGround()) {
+		y += 1;
+	}
+	render();
+	y = tempY;
 }
