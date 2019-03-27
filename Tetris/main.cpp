@@ -8,10 +8,10 @@ Then I can start adding more stuff.
 
 What's next on the agenda?
 - Autorepeat
+- Delay? + visual effect after block landed
+- Delay + visual effect after line clear
 - Track lines cleared, later score
 - Speed up as more lines are cleared
-- Many, many small but important technical details - rotation limit, ghost piece, autorepeat etc.
-- Delay after line clear
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
 */

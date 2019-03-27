@@ -15,15 +15,7 @@ const int NUM_DIMENSIONS = 2;
 const int NUM_NEXT_PIECES = 6;
 const double SOFT_DROP_G = 1;
 const int LOCK_SPEED = 40; //in frames
-enum BlockTypes {
-	I_BLOCK,
-	J_BLOCK,
-	L_BLOCK,
-	O_BLOCK,
-	S_BLOCK,
-	T_BLOCK,
-	Z_BLOCK,
-};
+
 
 class Player {
 public:

@@ -89,3 +89,8 @@ void Texture::render(int x, int y, int w, int h) {
 void Texture::setAlpha(int alpha) {
 	SDL_SetTextureAlphaMod(texture, alpha);
 }
+
+//Sets color of texture. Used to take turn 1 block texture into 7
+void Texture::setColor(Uint8 r, Uint8 g, Uint8 b) {
+	SDL_SetTextureColorMod(texture, r, g, b);
+}

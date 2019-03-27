@@ -33,8 +33,50 @@ void Playfield::loadTextures() {
 	std::string path;
 	for (int i = 0; i < NUM_BLOCK_TYPES; i++) {
 		//Pathname for block images. Subject to change
-		path = "./img/" + std::to_string(i) + ".png";
+		//path = "./img/" + std::to_string(i) + ".png";
+		path = "./img/block.png";
 		textures[i].loadFromFile(path);
+
+		//Colors each block texture separately
+		int r, g, b;
+		switch (i) {
+		case I_BLOCK:
+			r = 0;
+			g = 255;
+			b = 255;
+			break;
+		case J_BLOCK:
+			r = 0;
+			g = 0;
+			b = 255;
+			break;
+		case L_BLOCK:
+			r = 255;
+			g = 127;
+			b = 0;
+			break;
+		case O_BLOCK:
+			r = 255;
+			g = 255;
+			b = 0;
+			break;
+		case S_BLOCK:
+			r = 0;
+			g = 255;
+			b = 0;
+			break;
+		case T_BLOCK:
+			r = 255;
+			g = 0;
+			b = 255;
+			break;
+		case Z_BLOCK:
+			r = 255;
+			g = 0;
+			b = 0;
+			break;
+		}
+		textures[i].setColor(r, g, b);
 	}
 }
 

@@ -22,6 +22,7 @@ public:
 	void render(int x, int y);
 	void render(int x, int y, int w, int h);
 	void setAlpha(int alpha);
+	void setColor(Uint8 r, Uint8 g, Uint8 b);
 private:
 	SDL_Texture* texture; //actual texture
 	int width, height;

@@ -13,6 +13,15 @@ const int FIELD_WIDTH = 10;
 const int FIELD_HEIGHT = 40;
 const int VISIBLE_FIELD_HEIGHT = 20;
 const int NO_BLOCK = -1;
+enum BlockTypes {
+	I_BLOCK,
+	J_BLOCK,
+	L_BLOCK,
+	O_BLOCK,
+	S_BLOCK,
+	T_BLOCK,
+	Z_BLOCK,
+};
 
 class Playfield {
 	friend class Player;
