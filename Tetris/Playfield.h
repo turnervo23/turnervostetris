@@ -29,5 +29,6 @@ private:
 	int grid[FIELD_HEIGHT][FIELD_WIDTH]; // holds ids of blocks on grid, not including player?. -1 is empty
 	int x, y; //playfield's location on screen. top-left of highest fully visible row.
 	SDL_Rect playfieldClip; //clipRect for playfield
-	SDL_Rect nextPieceClip; //clipRect for next piece display
+	SDL_Rect nextBlockClip; //clipRect for next piece display
+	SDL_Rect heldBlockClip;
 };

@@ -209,7 +209,8 @@ void Player::update() {
 	applyGravity();
 	applyLock();
 	render();
-	renderNextPieces();
+	renderNextBlocks();
+	renderHeldBlock();
 }
 
 //Automatically move player down
@@ -388,7 +389,7 @@ void Player::getNextBlock() {
 
 //Renders the next pieces. Right side of playfield. First one larger than the rest
 //This function is super inefficient...cycles queue and sets NUM_NEXT_PIECES blockCoords every frame
-void Player::renderNextPieces() {
+void Player::renderNextBlocks() {
 	int needed[NUM_NEXT_PIECES]; //the ones we need to render
 	int queueLength = blockQueue.size();
 
@@ -406,7 +407,7 @@ void Player::renderNextPieces() {
 	int savedType = type;
 	int savedOri = orientation;
 
-	SDL_RenderSetClipRect(gRenderer, &playfield->nextPieceClip);
+	SDL_RenderSetClipRect(gRenderer, &playfield->nextBlockClip);
 	orientation = 0;
 	//First piece, rendered 3/4 size
 	type = needed[0];
@@ -429,6 +430,30 @@ void Player::renderNextPieces() {
 	}
 
 	//Returning player vars to original values
+	type = savedType;
+	orientation = savedOri;
+	setOrientation(orientation);
+}
+
+//Render the held piece, to the left of top of playfield
+void Player::renderHeldBlock() {
+	//I'm using player's blockCoords, type, and orientation temporarily to render the held block.
+	//These variables save those values so we can set them back at the end
+	int savedType = type;
+	int savedOri = orientation;
+
+	SDL_RenderSetClipRect(gRenderer, &playfield->heldBlockClip);
+	orientation = 0;
+	//Rendered 3/4 size
+	type = heldBlock;
+	setOrientation(orientation);
+	for (int j = 0; j < NUM_PLAYER_BLOCKS; j++) {
+		playfield->textures[heldBlock].render(playfield->x + (24 * blockCoords[j][0]) - 104,
+			                                  playfield->y + (24 * blockCoords[j][1]) + 40,
+			                                  24, 24);
+	}
+
+	//Returning player vars to orig values
 	type = savedType;
 	orientation = savedOri;
 	setOrientation(orientation);

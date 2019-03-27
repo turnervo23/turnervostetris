@@ -46,7 +46,8 @@ private:
 	bool isColliding(); //checks collision with playfield blocks for rotation
 	void addBlocksToQueue();
 	void getNextBlock();
-	void renderNextPieces();
+	void renderNextBlocks();
+	void renderHeldBlock();
 	bool isTouchingGround();
 	void applyLock();
 	void landBlock();

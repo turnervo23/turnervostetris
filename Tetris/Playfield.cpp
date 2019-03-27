@@ -17,10 +17,15 @@ Playfield::Playfield() {
 	playfieldClip.w = (32 * FIELD_WIDTH) + 16;
 	playfieldClip.h = (32 * VISIBLE_FIELD_HEIGHT) + 16;
 
-	nextPieceClip.x = x + (32 * FIELD_WIDTH) + 8;
-	nextPieceClip.y = y - 8;
-	nextPieceClip.w = 160;
-	nextPieceClip.h = 336;
+	nextBlockClip.x = x + (32 * FIELD_WIDTH) + 8;
+	nextBlockClip.y = y - 8;
+	nextBlockClip.w = 160;
+	nextBlockClip.h = 336;
+
+	heldBlockClip.x = x - 8 - 136;
+	heldBlockClip.y = y - 8;
+	heldBlockClip.w = 160;
+	heldBlockClip.h = 72;
 }
 
 //Loads the textures for the blocks
