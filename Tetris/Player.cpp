@@ -14,6 +14,8 @@ Player::Player(Playfield* p) {
 
 	heldBlock = -1; //no block
 	holdUsed = false;
+
+	moveProgress = 0;
 }
 
 //Spawn player block at top of the screen as "next" piece
@@ -154,29 +156,19 @@ void Player::spawnBlock() {
 	}
 }
 
-//Process player movement. Right now it's just generic up/down/left/right, not Tetris
-void Player::move(SDL_Keycode k) {
-	switch (k) {
-	/* //was using for debugging
-	case SDLK_UP:
-		y -= 1;
-		break;
-	case SDLK_DOWN:
-		y += 1;
-		break;
-	*/
-	case SDLK_LEFT:
-		x -= 1;
-		if (isColliding()) { //undo if invalid
-			x += 1;
-		}
-		break;
-	case SDLK_RIGHT:
+//Move the player left
+void Player::moveLeft() {
+	x -= 1;
+	if (isColliding()) { //undo if invalid
 		x += 1;
-		if (isColliding()) { //undo if invalid
-			x -= 1;
-		}
-		break;
+	}
+}
+
+//Move the player right
+void Player::moveRight() {
+	x += 1;
+	if (isColliding()) { //undo if invalid
+		x -= 1;
 	}
 }
 
@@ -206,6 +198,7 @@ void Player::render() {
 
 //Update player status. Called once per frame
 void Player::update() {
+	processMovement();
 	applyGravity();
 	applyLock();
 	render();
@@ -438,6 +431,11 @@ void Player::renderNextBlocks() {
 
 //Render the held piece, to the left of top of playfield
 void Player::renderHeldBlock() {
+	//skip if no held block
+	if (heldBlock == -1) {
+		return;
+	}
+
 	//I'm using player's blockCoords, type, and orientation temporarily to render the held block.
 	//These variables save those values so we can set them back at the end
 	int savedType = type;
@@ -532,4 +530,32 @@ void Player::renderGhostBlock() {
 	render();
 	playfield->textures[type].setAlpha(255);
 	y = tempY;
+}
+
+//Track whether player is holding left or right (for autorepeat)
+void Player::startMoveLeft() { holdingLeft = true; }
+void Player::startMoveRight() { holdingRight = true; }
+void Player::endMoveLeft() {
+	holdingLeft = false;
+	moveProgress = 0;
+}
+void Player::endMoveRight() {
+	holdingRight = false;
+	moveProgress = 0;
+}
+
+//Moves left or right if moveProgress is at a certain value.
+//It moves when left/right is first pressed, and every x frames after a certain amount of time has passed
+void Player::processMovement() {
+	if (holdingLeft == true || holdingRight == true) {
+		moveProgress += 1;
+	}
+
+	if (moveProgress == 1 || (moveProgress >= 10 && moveProgress % 2 == 0)) {
+		if (holdingLeft == true)
+			moveLeft();
+		else if (holdingRight == true) {
+			moveRight();
+		}
+	}
 }

@@ -76,6 +76,7 @@ void Playfield::loadTextures() {
 			b = 0;
 			break;
 		}
+
 		textures[i].setColor(r, g, b);
 	}
 }

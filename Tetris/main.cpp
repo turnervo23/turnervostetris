@@ -144,8 +144,10 @@ int main(int argc, char* args[])
 				else if (e.type == SDL_KEYDOWN) {
 					switch (e.key.keysym.sym) {
 					case SDLK_LEFT:
+						player1.startMoveLeft();
+						break;
 					case SDLK_RIGHT:
-						player1.move(e.key.keysym.sym);
+						player1.startMoveRight();
 						break;
 					case SDLK_DOWN:
 						player1.applySoftDrop(true);
@@ -176,8 +178,15 @@ int main(int argc, char* args[])
 				//Released keys
 				else if (e.type == SDL_KEYUP) {
 					switch (e.key.keysym.sym) {
+					case SDLK_LEFT:
+						player1.endMoveLeft();
+						break;
+					case SDLK_RIGHT:
+						player1.endMoveRight();
+						break;
 					case SDLK_DOWN:
 						player1.applySoftDrop(false);
+						break;
 					}
 				}
 			}

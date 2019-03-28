@@ -22,10 +22,16 @@ public:
 	Player(Playfield* p);
 	void startDrop();
 	void move(SDL_Keycode);
+	void moveLeft();
+	void moveRight();
 	void rotate(SDL_Keycode);
 	void applySoftDrop(bool);
 	void hardDrop();
 	void holdBlock();
+	void startMoveLeft();
+	void startMoveRight();
+	void endMoveLeft();
+	void endMoveRight();
 	void update(); //called once per frame
 	void _debug_cyclePiece(); //manually select piece (debug function)
 	void _debug_clearPlayfield();
@@ -45,6 +51,7 @@ private:
 	void applyLock();
 	void landBlock();
 	bool wallKick(int prev);
+	void processMovement(); //for autorepeat
 
 	Playfield* playfield; //specifies which playfield the player is on, in case there are multiple players
 	int x, y; // Grid coordinates for center of rotation, except I and O, which in default orientation have the "center" to the left and down
@@ -60,6 +67,9 @@ private:
 	int lockProgress;
 	int heldBlock;
 	bool holdUsed;
+	bool holdingLeft; //for autorepeat movement
+	bool holdingRight;
+	int moveProgress; //for autorepeat movement
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!
