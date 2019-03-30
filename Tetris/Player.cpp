@@ -162,6 +162,9 @@ void Player::moveLeft() {
 	if (isColliding()) { //undo if invalid
 		x += 1;
 	}
+	else {
+		lockProgress = 0;
+	}
 }
 
 //Move the player right
@@ -169,6 +172,9 @@ void Player::moveRight() {
 	x += 1;
 	if (isColliding()) { //undo if invalid
 		x -= 1;
+	}
+	else {
+		lockProgress = 0;
 	}
 }
 
@@ -180,6 +186,7 @@ void Player::applySoftDrop(bool yes) {
 		effGravity = gravity;
 }
 
+//Land the piece instantly and start the next drop
 void Player::hardDrop() {
 	while (!isTouchingGround()) {
 		y++;
@@ -475,6 +482,7 @@ void Player::applyLock() {
 	if (Player::isTouchingGround()) {
 		lockProgress++;
 	}
+
 	if (lockProgress >= LOCK_SPEED) {
 		landBlock();
 		lockProgress = 0;

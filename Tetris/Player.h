@@ -13,7 +13,7 @@
 const int NUM_PLAYER_BLOCKS = 4;
 const int NUM_DIMENSIONS = 2;
 const int NUM_NEXT_PIECES = 6;
-const double SOFT_DROP_G = 1;
+const double SOFT_DROP_G = 0.5; //moves down this amount per frame
 const int LOCK_SPEED = 40; //in frames
 
 
