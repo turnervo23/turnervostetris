@@ -121,11 +121,13 @@ int main(int argc, char* args[])
 	gFont = TTF_OpenFont("./font/consola.ttf", 16);
 	ui1.setFont(gFont, gTextColor);
 
+	int startTime = SDL_GetTicks();
+	ui1.setStartTime(startTime);
+
 	//Main loop
 	bool quit = false;
 	SDL_Event e;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-	int startTime = SDL_GetTicks();
 	int curFrame = -1;
 	int prevFrame = -1;
 	while (!quit) {
@@ -202,7 +204,7 @@ int main(int argc, char* args[])
 		playfield1.render();
 		player1.render();
 
-		ui1.setTime(SDL_GetTicks());
+		ui1.setTime(SDL_GetTicks() - startTime);
 		ui1.render();
 
 		//Update screen

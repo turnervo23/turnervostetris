@@ -5,8 +5,11 @@ UI::UI(Playfield* p) {
 }
 
 void UI::render() {
-	SDL_RenderSetClipRect(gRenderer, NULL);
-	timeTexture.render(playfield->x - 150, playfield->y + 100);
+	renderTime();
+}
+
+void UI::setStartTime(int t) {
+	startTime = t;
 }
 
 void UI::setTime(int t) {
@@ -39,10 +42,16 @@ void UI::setTime(int t) {
 	timeTexture.loadFromText(timeStr, font, textColor);
 }
 
+void UI::renderTime() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	timeTexture.render(playfield->x - 150, playfield->y + 100);
+}
+
 void UI::setFont(TTF_Font* f, SDL_Color c) {
 	font = f;
 	textColor = c;
 }
 
 void UI::update() {
+	setTime(SDL_GetTicks() - startTime);
 }

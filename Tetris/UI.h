@@ -8,12 +8,16 @@
 class UI {
 public:
 	UI(Playfield *p);
+	void setStartTime(int t);
 	void setTime(int t);
 	void setFont(TTF_Font* f, SDL_Color c);
 	void update();
 	void render();
 private:
+	void renderTime();
+
 	Playfield* playfield;
+	int startTime; //SDL ticks at start
 	int time; //SDL ticks
 	std::string timeStr; //formatted min:sec:ms
 	Texture timeTexture;
