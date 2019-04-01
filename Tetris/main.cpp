@@ -111,16 +111,15 @@ int main(int argc, char* args[])
 	if (!init())
 		exit(1);
 
-	//Creates playfield and player
 	Playfield playfield1;
 	playfield1.loadTextures();
+
 	Player player1(&playfield1);
 	player1.startDrop();
-	UI ui;
-	//Sets text font/color
+
+	UI ui1(&playfield1);
 	gFont = TTF_OpenFont("./font/consola.ttf", 16);
-	ui.setFont(gFont);
-	ui.setFontColor(gTextColor);
+	ui1.setFont(gFont, gTextColor);
 
 	//Main loop
 	bool quit = false;
@@ -130,12 +129,12 @@ int main(int argc, char* args[])
 	int curFrame = -1;
 	int prevFrame = -1;
 	while (!quit) {
-		//only process once per frame
-		//TODO: a solution for SDL_GetTicks unsigned overflow yet. it's ~49 days though so kinda low priority
+		//TODO: a solution for SDL_GetTicks unsigned overflow. it's ~49 days though so kinda low priority
 		curFrame = int (floor((SDL_GetTicks() - startTime) * 60 / 1000.0));
 		for (int i = prevFrame; i < curFrame; i++) { //process new frames
 			//Handle events on queue
 			while (SDL_PollEvent(&e) != 0) {
+				//Quit program
 				if (e.type == SDL_QUIT)
 					quit = true;
 
@@ -190,11 +189,10 @@ int main(int argc, char* args[])
 				}
 			}
 
-
 			//Update objects
 			playfield1.update();
 			player1.update();
-			//ui.update();
+			//ui1.update();
 		}
 
 		//Clear screen
@@ -203,7 +201,9 @@ int main(int argc, char* args[])
 		//Render objects
 		playfield1.render();
 		player1.render();
-		//ui.render();
+
+		ui1.setTime(SDL_GetTicks());
+		ui1.render();
 
 		//Update screen
 		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);

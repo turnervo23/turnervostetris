@@ -25,6 +25,7 @@ enum BlockTypes {
 
 class Playfield {
 	friend class Player;
+	friend class UI;
 public:
 	Playfield();
 	void loadTextures();

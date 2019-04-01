@@ -44,15 +44,16 @@ private:
 	bool isColliding(); //checks collision with playfield blocks for rotation
 	void addBlocksToQueue();
 	void getNextBlock();
-	void renderPlayer();
-	void renderNextBlocks();
-	void renderHeldBlock();
-	void renderGhostBlock();
 	bool isTouchingGround();
 	void applyLock();
 	void landBlock();
 	bool wallKick(int prev);
 	void processMovement(); //for autorepeat
+
+	void renderPlayer();
+	void renderNextBlocks();
+	void renderHeldBlock();
+	void renderGhostBlock();
 
 	Playfield* playfield; //specifies which playfield the player is on, in case there are multiple players
 	int x, y; // Grid coordinates for center of rotation, except I and O, which in default orientation have the "center" to the left and down
