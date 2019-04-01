@@ -26,6 +26,12 @@ Playfield::Playfield() {
 	heldBlockClip.y = y - 8;
 	heldBlockClip.w = 160;
 	heldBlockClip.h = 72;
+
+	//Initialize linesClearing
+	clearing = false;
+	for (int r = 0; r < FIELD_HEIGHT; r++) {
+		linesClearing[r] = false;
+	}
 }
 
 //Loads the textures for the blocks
@@ -79,12 +85,19 @@ void Playfield::loadTextures() {
 
 		textures[i].setColor(r, g, b);
 	}
+
+	//Line clear flash texture
+	path = "./img/flash.png";
+	flashTexture.loadFromFile(path);
 }
 
 //Calls all rendering functions
 void Playfield::render() {
 	renderPlayfield();
 	renderBlocks();
+	if (clearing == true) {
+		renderLineClear();
+	}
 }
 
 void Playfield::renderPlayfield() {
@@ -121,18 +134,20 @@ void Playfield::renderBlocks() {
 	for (int r = -1; r < VISIBLE_FIELD_HEIGHT; r++) {
 		for (int c = 0; c < FIELD_WIDTH; c++) {
 			if (grid[r + 20][c] != NO_BLOCK) {
-				textures[grid[r + 20][c]].render(x + (32 * c), y + (32 * r)); //i, j reversed?
+				textures[grid[r + 20][c]].render(x + (32 * c), y + (32 * r));
 			}
 		}
 	}
 }
 
 void Playfield::update() {
-	clearLines();
+	if (clearing == false) {
+		checkLineClear();
+	}
 }
 
 //Clear any lines made. No scoring implemented yet
-void Playfield::clearLines() {
+void Playfield::checkLineClear() {
 	bool line;
 	for (int r = 0; r < FIELD_HEIGHT; r++) { //for each row, check if line
 		line = true;
@@ -141,15 +156,42 @@ void Playfield::clearLines() {
 				line = false;
 			}
 		}
-		if (line == true) {
-			for (int c = 0; c < FIELD_WIDTH; c++) { //clear line
-				grid[r][c] = NO_BLOCK;
-			}
-			for (int rowsAbove = r - 1; rowsAbove > -1; rowsAbove--) { //move rows above down
-				for (int c = 0; c < FIELD_WIDTH; c++) {
-					grid[rowsAbove + 1][c] = grid[rowsAbove][c];
+		if (line == true) { //if line, start line clear animation
+			linesClearing[r] = true;
+			clearing = true;
+			lineClearStartFrame = gCurFrame;
+		}
+	}
+}
+
+//Line clear animation. Flashes on and off. Suspends gameplay for 60 frames
+void Playfield::renderLineClear() {
+	lineClearCurFrame = gCurFrame;
+
+	if (lineClearCurFrame - lineClearStartFrame >= 60) { //animation done
+		for (int r = 0; r < FIELD_HEIGHT; r++) { //top down. ensures cleared lines aren't moved
+			if (linesClearing[r] == true) {
+				for (int c = 0; c < FIELD_WIDTH; c++) { //remove line
+					grid[r][c] = NO_BLOCK;
 				}
+
+				for (int rowsAbove = r - 1; rowsAbove > -1; rowsAbove--) { //move rows above down
+					for (int c = 0; c < FIELD_WIDTH; c++) {
+						grid[rowsAbove + 1][c] = grid[rowsAbove][c];
+					}
+				}
+
+				linesClearing[r] = false;
 			}
 		}
+		clearing = false;
+	}
+	else if ((lineClearCurFrame - lineClearStartFrame) % 2 == 1) { //render flash on odd frames
+		for (int r = 0; r < FIELD_HEIGHT; r++) {
+			if (linesClearing[r] == true) {
+				SDL_RenderSetClipRect(gRenderer, &playfieldClip);
+				flashTexture.render(x, y + (r - 20) * 32);
+			}
+		}	
 	}
 }

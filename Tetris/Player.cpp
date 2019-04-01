@@ -213,9 +213,11 @@ void Player::renderPlayer() {
 
 //Update player status. Called once per frame
 void Player::update() {
-	processMovement();
-	applyGravity();
-	applyLock();
+	if (playfield->clearing == false) {
+		processMovement();
+		applyGravity();
+		applyLock();
+	}
 }
 
 //Automatically move player down

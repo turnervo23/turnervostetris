@@ -7,8 +7,6 @@ First finished version should have at least:
 Then I can start adding more stuff.
 
 What's next on the agenda?
-- Delay? + visual effect after block landed
-- Delay + visual effect after line clear
 - Track lines cleared, later score
 - Speed up as more lines are cleared
 - Work my way through the Tetris Guideline and make sure everything is implemented.
@@ -30,6 +28,10 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 //Screen dimension constants
 const int SCREEN_WIDTH = 672; //320 playfield, 16 border, 168 next blocks, 168 hold blocks?
 const int SCREEN_HEIGHT = 720;
+
+//Frame counters
+int gCurFrame;
+int gPrevFrame;
 
 //Window and screen surface
 SDL_Window* gWindow = NULL;
@@ -121,19 +123,19 @@ int main(int argc, char* args[])
 	gFont = TTF_OpenFont("./font/consola.ttf", 16);
 	ui1.setFont(gFont, gTextColor);
 
-	int startTime = SDL_GetTicks();
+	int startTime = SDL_GetTicks(); //frame counting starts here
 	ui1.setStartTime(startTime);
 
 	//Main loop
 	bool quit = false;
 	SDL_Event e;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-	int curFrame = -1;
-	int prevFrame = -1;
+	gCurFrame = -1;
+	gPrevFrame = -1;
 	while (!quit) {
 		//TODO: a solution for SDL_GetTicks unsigned overflow. it's ~49 days though so kinda low priority
-		curFrame = int (floor((SDL_GetTicks() - startTime) * 60 / 1000.0));
-		for (int i = prevFrame; i < curFrame; i++) { //process new frames
+		gCurFrame = int (floor((SDL_GetTicks() - startTime) * 60 / 1000.0));
+		for (int i = gPrevFrame; i < gCurFrame; i++) { //process new frames
 			//Handle events on queue
 			while (SDL_PollEvent(&e) != 0) {
 				//Quit program
@@ -194,7 +196,7 @@ int main(int argc, char* args[])
 			//Update objects
 			playfield1.update();
 			player1.update();
-			//ui1.update();
+			ui1.update();
 		}
 
 		//Clear screen
@@ -203,15 +205,13 @@ int main(int argc, char* args[])
 		//Render objects
 		playfield1.render();
 		player1.render();
-
-		ui1.setTime(SDL_GetTicks() - startTime);
 		ui1.render();
 
 		//Update screen
 		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderPresent(gRenderer);
 
-		prevFrame = curFrame; //update frame count
+		gPrevFrame = gCurFrame; //update frame count
 	}
 
 	//End of program
