@@ -7,7 +7,6 @@ First finished version should have at least:
 Then I can start adding more stuff.
 
 What's next on the agenda?
-- Autorepeat
 - Delay? + visual effect after block landed
 - Delay + visual effect after line clear
 - Track lines cleared, later score
@@ -191,19 +190,26 @@ int main(int argc, char* args[])
 				}
 			}
 
-			//Clear screen
-			SDL_RenderClear(gRenderer);
 
-			//Render objects
+			//Update objects
 			playfield1.update();
 			player1.update();
 			//ui.update();
-
-			//Update screen
-			SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-			SDL_RenderPresent(gRenderer);
-			prevFrame = curFrame;
 		}
+
+		//Clear screen
+		SDL_RenderClear(gRenderer);
+
+		//Render objects
+		playfield1.render();
+		player1.render();
+		//ui.render();
+
+		//Update screen
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderPresent(gRenderer);
+
+		prevFrame = curFrame; //update frame count
 	}
 
 	//End of program

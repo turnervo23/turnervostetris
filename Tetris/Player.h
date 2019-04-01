@@ -32,11 +32,11 @@ public:
 	void startMoveRight();
 	void endMoveLeft();
 	void endMoveRight();
-	void update(); //called once per frame
+	void update(); //called once per frame (60 fps)
+	void render(); //called once per frame processing loop
 	void _debug_cyclePiece(); //manually select piece (debug function)
 	void _debug_clearPlayfield();
 private:
-	void render();
 	void applyGravity();
 	void setOrientation(int);
 	void setBlockCoords(int, int, int, int, int, int, int, int);
@@ -44,6 +44,7 @@ private:
 	bool isColliding(); //checks collision with playfield blocks for rotation
 	void addBlocksToQueue();
 	void getNextBlock();
+	void renderPlayer();
 	void renderNextBlocks();
 	void renderHeldBlock();
 	void renderGhostBlock();

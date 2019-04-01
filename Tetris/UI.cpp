@@ -22,5 +22,4 @@ void UI::setFontColor(SDL_Color c) {
 }
 
 void UI::update() {
-	render();
 }

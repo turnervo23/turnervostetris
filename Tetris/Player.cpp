@@ -194,12 +194,20 @@ void Player::hardDrop() {
 	landBlock();
 }
 
-//Render player's blocks
+//Call all rendering functions
 void Player::render() {
+	renderPlayer();
+	renderNextBlocks();
+	renderHeldBlock();
+	renderGhostBlock();
+}
+
+//Render player's blocks
+void Player::renderPlayer() {
 	SDL_RenderSetClipRect(gRenderer, &playfield->playfieldClip);
 	for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
 		playfield->textures[type].render(playfield->x + 32 * (x + blockCoords[i][0]),
-			                             playfield->y + 32 * (y + blockCoords[i][1]));
+			playfield->y + 32 * (y + blockCoords[i][1]));
 	}
 }
 
@@ -208,10 +216,6 @@ void Player::update() {
 	processMovement();
 	applyGravity();
 	applyLock();
-	render();
-	renderNextBlocks();
-	renderHeldBlock();
-	renderGhostBlock();
 }
 
 //Automatically move player down
@@ -535,7 +539,7 @@ void Player::renderGhostBlock() {
 		y += 1;
 	}
 	playfield->textures[type].setAlpha(127);
-	render();
+	renderPlayer();
 	playfield->textures[type].setAlpha(255);
 	y = tempY;
 }

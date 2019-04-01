@@ -81,8 +81,13 @@ void Playfield::loadTextures() {
 	}
 }
 
-//Render blocks and gridlines
+//Calls all rendering functions
 void Playfield::render() {
+	renderPlayfield();
+	renderBlocks();
+}
+
+void Playfield::renderPlayfield() {
 	SDL_RenderSetClipRect(gRenderer, &playfieldClip);
 	//Render gridlines (2 px thickness for symmetry)
 	//Horizontal
@@ -101,13 +106,13 @@ void Playfield::render() {
 	SDL_SetRenderDrawColor(gRenderer, 0x40, 0x40, 0x40, 0xFF); //dark gray
 	for (int i = 0; i < 8; i++) {
 		SDL_RenderDrawLine(gRenderer, x - 9, y - 9 + i,
-			                          x + (32 * FIELD_WIDTH) + 8, y - 9 + i); //top
+			x + (32 * FIELD_WIDTH) + 8, y - 9 + i); //top
 		SDL_RenderDrawLine(gRenderer, x - 9, y + (32 * VISIBLE_FIELD_HEIGHT) + 8 - i,
-			                          x + (32 * FIELD_WIDTH) + 8, y + (32 * VISIBLE_FIELD_HEIGHT) + 8 - i); //bottom
+			x + (32 * FIELD_WIDTH) + 8, y + (32 * VISIBLE_FIELD_HEIGHT) + 8 - i); //bottom
 		SDL_RenderDrawLine(gRenderer, x - 9 + i, y - 9,
-			                          x - 9 + i, y + (32 * VISIBLE_FIELD_HEIGHT) + 8); // left
+			x - 9 + i, y + (32 * VISIBLE_FIELD_HEIGHT) + 8); // left
 		SDL_RenderDrawLine(gRenderer, x + (32 * FIELD_WIDTH) + 8 - i, y - 9,
-			                          x + (32 * FIELD_WIDTH) + 8 - i, y + (32 * VISIBLE_FIELD_HEIGHT) + 8); //right
+			x + (32 * FIELD_WIDTH) + 8 - i, y + (32 * VISIBLE_FIELD_HEIGHT) + 8); //right
 	}
 }
 
@@ -124,8 +129,6 @@ void Playfield::renderBlocks() {
 
 void Playfield::update() {
 	clearLines();
-	render();
-	renderBlocks();
 }
 
 //Clear any lines made. No scoring implemented yet

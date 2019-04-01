@@ -10,8 +10,8 @@ public:
 	void setFont(TTF_Font* f);
 	void setFontColor(SDL_Color c);
 	void update();
-private:
 	void render();
+private:
 	int time;
 	Texture timeTexture;
 	TTF_Font* font;

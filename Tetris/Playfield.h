@@ -28,9 +28,10 @@ class Playfield {
 public:
 	Playfield();
 	void loadTextures();
-	void update(); //called once per frame
+	void update(); //called once per frame (60 fps)
+	void render(); //called once per frame processing loop
 private:
-	void render();
+	void renderPlayfield();
 	void renderBlocks();
 	void clearLines();
 
