@@ -49,6 +49,7 @@ private:
 	bool linesClearing[FIELD_HEIGHT]; //true if line is being cleared, false otherwise.
 	int lineClearStartFrame;
 	int lineClearCurFrame;
+
 	SDL_Rect playfieldClip; //clipRect for playfield
 	SDL_Rect nextBlockClip; //clipRect for next piece display
 	SDL_Rect heldBlockClip;

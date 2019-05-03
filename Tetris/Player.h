@@ -21,7 +21,6 @@ class Player {
 public:
 	Player(Playfield* p);
 	void startDrop();
-	void move(SDL_Keycode);
 	void moveLeft();
 	void moveRight();
 	void rotate(SDL_Keycode);

@@ -1,14 +1,22 @@
 /*
 Xtvo's Tetris:
-My plan is to make a fully functional working Tetris clone using SDL in C++.
-First finished version should have at least:
+My goal is to make a fully functional Tetris clone using SDL in C++.
+The first finished version should have at least:
 - Main menu
 - Endless mode (aka Marathon) with dynamic speed levels and scoring.
-Then I can start adding more stuff.
+Then I can start adding more stuff if I want.
 
 What's next on the agenda?
+- Rewrite rotate to match movement
+- 15 rotation/movement limit before lock
+- Game over
 - Track lines cleared, later score
 - Speed up as more lines are cleared
+- Rewrite soft drop speed to be a multiple of default gravity
+- Animation for piece lock
+- Ready 3 2 1 go
+- Main menu
+- Customizable controls
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
 */
