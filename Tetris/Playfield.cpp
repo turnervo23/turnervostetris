@@ -164,11 +164,11 @@ void Playfield::checkLineClear() {
 	}
 }
 
-//Line clear animation. Flashes on and off. Suspends gameplay for 60 frames
+//Line clear animation. Flashes on and off. Suspends gameplay for LINE_CLEAR_DELAY frames
 void Playfield::renderLineClear() {
 	lineClearCurFrame = gCurFrame;
 
-	if (lineClearCurFrame - lineClearStartFrame >= 60) { //animation done
+	if (lineClearCurFrame - lineClearStartFrame >= LINE_CLEAR_DELAY) { //animation done
 		for (int r = 0; r < FIELD_HEIGHT; r++) { //top down. ensures cleared lines aren't moved
 			if (linesClearing[r] == true) {
 				for (int c = 0; c < FIELD_WIDTH; c++) { //remove line

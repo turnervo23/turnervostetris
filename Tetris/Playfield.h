@@ -14,6 +14,8 @@ const int NUM_BLOCK_TYPES = 7;
 const int FIELD_WIDTH = 10;
 const int FIELD_HEIGHT = 40;
 const int VISIBLE_FIELD_HEIGHT = 20;
+const int LINE_CLEAR_DELAY = 30; //in frames
+
 const int NO_BLOCK = -1;
 enum BlockTypes {
 	I_BLOCK,
