@@ -7,9 +7,10 @@ UI::UI(Playfield* p) {
 	timeFont = TTF_OpenFont("./font/consola.ttf", 16);
 	timeTextColor = { 0, 0, 0, 0 };
 
+	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consola.ttf", 32);
 	gameOverTextColor = { 0, 0, 0, 0 };
-	gameOverTexture.loadFromText("GAME OVER", gameOverFont, gameOverTextColor);
+	gameOverTexture.loadFromText(gameOverStr, gameOverFont, gameOverTextColor);
 	gameOverTimer = 0;
 }
 
@@ -70,7 +71,11 @@ void UI::update() {
 	}
 }
 
+//Renders the GAME OVER message in the middle of the playfield after it's been one second since game over
 void UI::renderGameOver() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	gameOverTexture.render(playfield->x + 100, playfield->y + 100);
+	int w, h;
+	TTF_SizeText(gameOverFont, gameOverStr.c_str(), &w, &h); //get dimensions of game over texture
+
+	gameOverTexture.render(playfield->x + 160 - w/2, playfield->y + 100);
 }

@@ -28,6 +28,7 @@ private:
 	SDL_Color timeTextColor;
 	
 	Texture gameOverTexture;
+	std::string gameOverStr;
 	TTF_Font* gameOverFont;
 	SDL_Color gameOverTextColor;
 	int gameOverTimer; //displays text after GAME_OVER_TEXT_DELAY
