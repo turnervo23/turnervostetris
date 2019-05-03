@@ -15,7 +15,7 @@ const int NUM_DIMENSIONS = 2;
 const int NUM_NEXT_PIECES = 6;
 const double SOFT_DROP_G = 0.5; //moves down this amount per frame
 const int LOCK_SPEED = 40; //in frames
-
+const int MAX_GROUND_ACTIONS = 15;
 
 class Player {
 public:
@@ -72,6 +72,7 @@ private:
 	bool holdingLeft; //for autorepeat movement
 	bool holdingRight;
 	int moveProgress; //for autorepeat movement
+	int groundActions; //locks after 15
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!

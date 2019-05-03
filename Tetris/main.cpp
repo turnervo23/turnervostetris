@@ -7,7 +7,6 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Rewrite rotate to match movement
 - 15 rotation/movement limit before lock
 - Game over
 - Track lines cleared, later score
@@ -174,7 +173,7 @@ int main(int argc, char* args[])
 					case SDLK_LSHIFT:
 						player1.holdBlock();
 						break;
-					//debug only
+					//debug only, remove in finished version
 					case SDLK_c:
 						player1._debug_cyclePiece();
 						break;

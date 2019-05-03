@@ -24,6 +24,7 @@ void Player::startDrop() {
 	spawnBlock();
 	setOrientation(0);
 	gravityProgress = 0;
+	groundActions = 0;
 	holdUsed = false; //only if not called by holdBlock()
 }
 
@@ -164,6 +165,9 @@ void Player::moveLeft() {
 	}
 	else {
 		lockProgress = 0;
+		if (isTouchingGround()) {
+			groundActions += 1; //only so many ground actions before lock
+		}
 	}
 }
 
@@ -175,6 +179,9 @@ void Player::moveRight() {
 	}
 	else {
 		lockProgress = 0;
+		if (isTouchingGround()) {
+			groundActions += 1; //only so many ground actions before lock
+		}
 	}
 }
 
@@ -263,6 +270,9 @@ void Player::rotateLeft() {
 	}
 	else {
 		lockProgress = 0; //reset lock progress if success
+		if (isTouchingGround()) {
+			groundActions += 1; //only so many ground actions before lock
+		}
 	}
 }
 
@@ -298,6 +308,9 @@ void Player::rotateRight() {
 	}
 	else {
 		lockProgress = 0; //reset lock delay if success
+		if (isTouchingGround()) {
+			groundActions += 1; //only so many ground actions before lock
+		}
 	}
 }
 
@@ -490,7 +503,7 @@ void Player::applyLock() {
 		lockProgress++;
 	}
 
-	if (lockProgress >= LOCK_SPEED) {
+	if (lockProgress >= LOCK_SPEED || groundActions >= MAX_GROUND_ACTIONS) {
 		landBlock();
 		lockProgress = 0;
 	}
