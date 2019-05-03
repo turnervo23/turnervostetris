@@ -202,10 +202,12 @@ void Player::applySoftDrop(bool yes) {
 
 //Land the piece instantly and start the next drop
 void Player::hardDrop() {
-	while (!isTouchingGround()) {
-		y++;
+	if (!playfield->suspended) {
+		while (!isTouchingGround()) {
+			y++;
+		}
+		landBlock();
 	}
-	landBlock();
 }
 
 //Call all rendering functions
@@ -247,76 +249,80 @@ void Player::applyGravity() {
 
 //Rotates the player's piece left (counterclockwise)
 void Player::rotateLeft() {
-	int prev = orientation;
-	if (type == I_BLOCK) { //move center of rotation. specific for I block
-		switch (prev) { //based on prev orientation
-		case 0:
-			y += 1;
-			break;
-		case 1:
-			x -= 1;
-			break;
-		case 2:
-			y -= 1;
-			break;
-		case 3:
-			x += 1;
-			break;
+	if (!playfield->suspended) {
+		int prev = orientation;
+		if (type == I_BLOCK) { //move center of rotation. specific for I block
+			switch (prev) { //based on prev orientation
+			case 0:
+				y += 1;
+				break;
+			case 1:
+				x -= 1;
+				break;
+			case 2:
+				y -= 1;
+				break;
+			case 3:
+				x += 1;
+				break;
+			}
 		}
-	}
 
-	//set new orientation
-	orientation -= 1;
-	if (orientation == -1) {
-		orientation = 3;
-	}
-	setOrientation(orientation);
+		//set new orientation
+		orientation -= 1;
+		if (orientation == -1) {
+			orientation = 3;
+		}
+		setOrientation(orientation);
 
-	if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
-		rotateRight();
-	}
-	else {
-		lockProgress = 0; //reset lock progress if success
-		if (isTouchingGround()) {
-			groundActions += 1; //only so many ground actions before lock
+		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
+			rotateRight();
+		}
+		else {
+			lockProgress = 0; //reset lock progress if success
+			if (isTouchingGround()) {
+				groundActions += 1; //only so many ground actions before lock
+			}
 		}
 	}
 }
 
 //Rotates the player's piece right (clockwise)
 void Player::rotateRight() {
-	int prev = orientation;
-	if (type == I_BLOCK) { //move center of rotation. specific for I block
-		switch (prev) { //based on prev orientation
-		case 0:
-			x += 1;
-			break;
-		case 1:
-			y += 1;
-			break;
-		case 2:
-			x -= 1;
-			break;
-		case 3:
-			y -= 1;
-			break;
+	if (!playfield->suspended) {
+		int prev = orientation;
+		if (type == I_BLOCK) { //move center of rotation. specific for I block
+			switch (prev) { //based on prev orientation
+			case 0:
+				x += 1;
+				break;
+			case 1:
+				y += 1;
+				break;
+			case 2:
+				x -= 1;
+				break;
+			case 3:
+				y -= 1;
+				break;
+			}
 		}
-	}
 
-	//set new orientation
-	orientation += 1;
-	if (orientation == 4) {
-		orientation = 0;
-	}
-	setOrientation(orientation);
+		//set new orientation
+		orientation += 1;
+		if (orientation == 4) {
+			orientation = 0;
+		}
+		setOrientation(orientation);
 
-	if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
-		rotateLeft();
-	}
-	else {
-		lockProgress = 0; //reset lock delay if success
-		if (isTouchingGround()) {
-			groundActions += 1; //only so many ground actions before lock
+		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
+			rotateLeft();
+		}
+		else {
+			lockProgress = 0; //reset lock delay if success
+			if (isTouchingGround()) {
+				groundActions += 1; //only so many ground actions before lock
+			}
 		}
 	}
 }
