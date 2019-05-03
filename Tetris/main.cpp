@@ -44,8 +44,6 @@ int gPrevFrame;
 //Window and screen surface
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-TTF_Font* gFont = NULL;
-SDL_Color gTextColor = { 0, 0, 0, 0 }; //black
 
 //Aliases for passing to playerMove function
 enum KeyPresses {
@@ -102,9 +100,6 @@ bool init() {
 
 //Ends the program
 void end() {
-	TTF_CloseFont(gFont);
-	gFont = NULL;
-
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
@@ -128,9 +123,6 @@ int main(int argc, char* args[])
 	player1.startDrop();
 
 	UI ui1(&playfield1);
-	gFont = TTF_OpenFont("./font/consola.ttf", 16);
-	ui1.setFont(gFont, gTextColor);
-
 	int startTime = SDL_GetTicks(); //frame counting starts here
 	ui1.setStartTime(startTime);
 

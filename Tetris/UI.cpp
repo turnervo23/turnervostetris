@@ -4,7 +4,12 @@ UI::UI(Playfield* p) {
 	playfield = p;
 	playfield->ui = this;
 
-	gameOverTexture.loadFromText("GAME OVER", TTF_OpenFont("./font/consola.ttf", 32), { 0, 0, 0, 0 });
+	timeFont = TTF_OpenFont("./font/consola.ttf", 16);
+	timeTextColor = { 0, 0, 0, 0 };
+
+	gameOverFont = TTF_OpenFont("./font/consola.ttf", 32);
+	gameOverTextColor = { 0, 0, 0, 0 };
+	gameOverTexture.loadFromText("GAME OVER", gameOverFont, gameOverTextColor);
 }
 
 void UI::render() {
@@ -45,17 +50,12 @@ void UI::setTime(int t) {
 		timeStr = "Time: 99:59.999";
 	}
 
-	timeTexture.loadFromText(timeStr, font, textColor);
+	timeTexture.loadFromText(timeStr, timeFont, timeTextColor);
 }
 
 void UI::renderTime() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	timeTexture.render(playfield->x - 150, playfield->y + 100);
-}
-
-void UI::setFont(TTF_Font* f, SDL_Color c) {
-	font = f;
-	textColor = c;
 }
 
 void UI::update() {

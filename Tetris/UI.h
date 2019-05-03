@@ -10,7 +10,6 @@ public:
 	UI(Playfield *p);
 	void setStartTime(int t);
 	void setTime(int t);
-	void setFont(TTF_Font* f, SDL_Color c);
 	void update();
 	void render();
 private:
@@ -23,7 +22,10 @@ private:
 	int time; //SDL ticks
 	std::string timeStr; //formatted min:sec:ms
 	Texture timeTexture;
-	TTF_Font* font;
-	SDL_Color textColor;
+	TTF_Font* timeFont;
+	SDL_Color timeTextColor;
+	
 	Texture gameOverTexture;
+	TTF_Font* gameOverFont;
+	SDL_Color gameOverTextColor;
 };
