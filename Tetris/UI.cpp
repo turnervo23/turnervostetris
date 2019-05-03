@@ -1,4 +1,6 @@
 #include "UI.h"
+#include "Playfield.h"
+#include "Player.h"
 
 UI::UI(Playfield* p) {
 	playfield = p;

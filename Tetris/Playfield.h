@@ -2,12 +2,17 @@
 //- loading and rendering the blocks for the player, ones that have landed, and hold/next pieces
 //- keeping track of which grid spaces have which blocks in them
 #pragma once
+#ifndef PLAYFIELD_H
+#define PLAYFIELD_H
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
 #include <iostream>
 #include "Texture.h"
+
+class Player;
+class UI;
 
 extern int gCurFrame;
 
@@ -62,3 +67,5 @@ private:
 	SDL_Rect nextBlockClip; //clipRect for next piece display
 	SDL_Rect heldBlockClip;
 };
+
+#endif

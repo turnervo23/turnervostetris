@@ -1,10 +1,11 @@
 #pragma once
+#ifndef UI_H
+#define UI_H
 
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
 #include "Texture.h"
-#include "Playfield.h"
 
 const int GAME_OVER_TEXT_DELAY = 60;
 
@@ -41,3 +42,5 @@ private:
 	SDL_Color gameOverTextColor;
 	int gameOverTimer; //displays text after GAME_OVER_TEXT_DELAY
 };
+
+#endif

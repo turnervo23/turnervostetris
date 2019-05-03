@@ -1,4 +1,6 @@
 #include "Playfield.h"
+#include "UI.h"
+#include "Player.h"
 
 Playfield::Playfield() {
 	//Empty playfield grid
@@ -167,7 +169,7 @@ void Playfield::checkLineClear() {
 			linesClearing[r] = true;
 			suspended = true;
 			lineClearStartFrame = gCurFrame;
-			player.incrementNumLinesCleared();
+			player->incrementNumLinesCleared();
 		}
 	}
 }

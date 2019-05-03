@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Playfield.h"
+#include "UI.h"
 
 //Constructor - sets all initial values for player
 Player::Player(Playfield* p) {

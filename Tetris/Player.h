@@ -1,8 +1,9 @@
 //Player.h - declaration of the Player class, which handles:
 //- processing player movement and rotation
 //- rendering the player's blocks on the screen using Playfield::render()
-
 #pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <SDL.h>
 #include <queue>
@@ -101,3 +102,5 @@ private:
       { {1, 0}, {-2, 0}, {1, 2}, {-2, -1} },
       { {-1, 0}, {2, 0}, {-1, -2}, {2, 1} } };
 };
+
+#endif
