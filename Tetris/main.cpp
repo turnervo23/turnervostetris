@@ -165,9 +165,11 @@ int main(int argc, char* args[])
 					case SDLK_UP:
 						player1.hardDrop();
 						break;
-					case SDLK_x:
 					case SDLK_z:
-						player1.rotate(e.key.keysym.sym);
+						player1.rotateLeft();
+						break;
+					case SDLK_x:
+						player1.rotateRight();
 						break;
 					case SDLK_LSHIFT:
 						player1.holdBlock();

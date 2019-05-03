@@ -231,72 +231,73 @@ void Player::applyGravity() {
 	}
 }
 
-//Rotates piece. When finished, will handle SRS-specific stuff like wall kicks
-void Player::rotate(SDL_Keycode k) {
+//Rotates the player's piece left (counterclockwise)
+void Player::rotateLeft() {
 	int prev = orientation;
-	if (k == SDLK_x) { //clockwise
-		if (type == I_BLOCK) { //move center of rotation. specific for I block
-			switch (prev) { //based on prev orientation
-			case 0:
-				x += 1;
-				break;
-			case 1:
-				y += 1;
-				break;
-			case 2:
-				x -= 1;
-				break;
-			case 3:
-				y -= 1;
-				break;
-			}
-		}
-
-		//set new orientation
-		orientation += 1;
-		if (orientation == 4) {
-			orientation = 0;
-		}
-		setOrientation(orientation);
-
-		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
-			rotate(SDLK_z);
-		}
-		else {
-			lockProgress = 0; //reset lock delay if success
+	if (type == I_BLOCK) { //move center of rotation. specific for I block
+		switch (prev) { //based on prev orientation
+		case 0:
+			y += 1;
+			break;
+		case 1:
+			x -= 1;
+			break;
+		case 2:
+			y -= 1;
+			break;
+		case 3:
+			x += 1;
+			break;
 		}
 	}
-	else if (k == SDLK_z) { //counterclockwise
-		if (type == I_BLOCK) { //move center of rotation. specific for I block
-			switch (prev) { //based on prev orientation
-			case 0:
-				y += 1;
-				break;
-			case 1:
-				x -= 1;
-				break;
-			case 2:
-				y -= 1;
-				break;
-			case 3:
-				x += 1;
-				break;
-			}
-		}
 
-		//set new orientation
-		orientation -= 1;
-		if (orientation == -1) {
-			orientation = 3;
-		}
-		setOrientation(orientation);
+	//set new orientation
+	orientation -= 1;
+	if (orientation == -1) {
+		orientation = 3;
+	}
+	setOrientation(orientation);
 
-		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
-			rotate(SDLK_x);
+	if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
+		rotateRight();
+	}
+	else {
+		lockProgress = 0; //reset lock progress if success
+	}
+}
+
+//Rotates the player's piece right (clockwise)
+void Player::rotateRight() {
+	int prev = orientation;
+	if (type == I_BLOCK) { //move center of rotation. specific for I block
+		switch (prev) { //based on prev orientation
+		case 0:
+			x += 1;
+			break;
+		case 1:
+			y += 1;
+			break;
+		case 2:
+			x -= 1;
+			break;
+		case 3:
+			y -= 1;
+			break;
 		}
-		else {
-			lockProgress = 0; //reset lock progress if success
-		}
+	}
+
+	//set new orientation
+	orientation += 1;
+	if (orientation == 4) {
+		orientation = 0;
+	}
+	setOrientation(orientation);
+
+	if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
+		rotateLeft();
+	}
+	else {
+		lockProgress = 0; //reset lock delay if success
 	}
 }
 

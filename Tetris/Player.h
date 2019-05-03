@@ -23,7 +23,8 @@ public:
 	void startDrop();
 	void moveLeft();
 	void moveRight();
-	void rotate(SDL_Keycode);
+	void rotateLeft();
+	void rotateRight();
 	void applySoftDrop(bool);
 	void hardDrop();
 	void holdBlock();
