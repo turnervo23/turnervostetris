@@ -3,10 +3,15 @@
 UI::UI(Playfield* p) {
 	playfield = p;
 	playfield->ui = this;
+
+	gameOverTexture.loadFromText("GAME OVER", TTF_OpenFont("./font/consola.ttf", 32), { 0, 0, 0, 0 });
 }
 
 void UI::render() {
 	renderTime();
+	if (playfield->gameOver == true) {
+		renderGameOver();
+	}
 }
 
 void UI::setStartTime(int t) {
@@ -54,5 +59,12 @@ void UI::setFont(TTF_Font* f, SDL_Color c) {
 }
 
 void UI::update() {
-	setTime(SDL_GetTicks() - startTime);
+	if (playfield->gameOver == false) {
+		setTime(SDL_GetTicks() - startTime); //update time unless game is over
+	}
+}
+
+void UI::renderGameOver() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	gameOverTexture.render(playfield->x + 100, playfield->y + 100);
 }

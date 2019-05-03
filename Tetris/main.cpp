@@ -171,6 +171,9 @@ int main(int argc, char* args[])
 					case SDLK_x:
 						player1.rotateRight();
 						break;
+					case SDLK_g: //temporary to test game over
+						playfield1.endGame();
+						break;
 					case SDLK_LSHIFT:
 						player1.holdBlock();
 						break;

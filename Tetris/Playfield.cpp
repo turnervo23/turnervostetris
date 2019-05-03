@@ -28,6 +28,7 @@ Playfield::Playfield() {
 	heldBlockClip.h = 72;
 
 	suspended = false;
+	gameOver = false;
 
 	lineClearing = false;
 	for (int r = 0; r < FIELD_HEIGHT; r++) {
