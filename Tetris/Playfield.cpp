@@ -33,6 +33,9 @@ Playfield::Playfield() {
 	for (int r = 0; r < FIELD_HEIGHT; r++) {
 		linesClearing[r] = false;
 	}
+
+	player = NULL;
+	ui = NULL;
 }
 
 //Loads the textures for the blocks
@@ -198,4 +201,10 @@ void Playfield::renderLineClear() {
 			}
 		}	
 	}
+}
+
+//Ends the game, suspending gameplay indefinitely (later: until menu selection by player)
+void Playfield::endGame() {
+	suspended = true;
+	gameOver = true;
 }

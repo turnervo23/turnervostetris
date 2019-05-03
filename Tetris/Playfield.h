@@ -35,21 +35,26 @@ public:
 	void loadTextures();
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
+	void endGame();
 private:
 	void renderPlayfield();
 	void renderBlocks();
 	void checkLineClear();
 	void renderLineClear();
 
+	Player *player;
+	UI *ui;
+
 	Texture textures[NUM_BLOCK_TYPES];
 	Texture flashTexture;
 	int grid[FIELD_HEIGHT][FIELD_WIDTH]; // holds ids of blocks on grid, not including player?. -1 is empty
 	int x, y; //playfield's location on screen. top-left of highest fully visible row.
 	bool suspended; //if waiting for line clear animation to finish. player doesn't update if this is true
-	bool linesClearing[FIELD_HEIGHT]; //true if line is being cleared, false otherwise.
+	bool linesClearing[FIELD_HEIGHT]; //true if line with given index is being cleared, false otherwise.
 	bool lineClearing; //true if ANY line is being cleared
 	int lineClearStartFrame;
 	int lineClearCurFrame;
+	bool gameOver;
 
 	SDL_Rect playfieldClip; //clipRect for playfield
 	SDL_Rect nextBlockClip; //clipRect for next piece display

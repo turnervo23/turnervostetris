@@ -72,7 +72,7 @@ private:
 	bool holdingLeft; //for autorepeat movement
 	bool holdingRight;
 	int moveProgress; //for autorepeat movement
-	int groundActions; //locks after 15
+	int groundActions; //player piece locks after MAX_GROUND_ACTIONS
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!

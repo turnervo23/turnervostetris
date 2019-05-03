@@ -2,6 +2,7 @@
 
 UI::UI(Playfield* p) {
 	playfield = p;
+	playfield->ui = this;
 }
 
 void UI::render() {

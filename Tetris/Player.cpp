@@ -17,6 +17,8 @@ Player::Player(Playfield* p) {
 	holdUsed = false;
 
 	moveProgress = 0;
+
+	playfield->player = this;
 }
 
 //Spawn player block at top of the screen as "next" piece
