@@ -476,7 +476,7 @@ void Player::renderHeldBlock() {
 		return;
 	}
 
-	//I'm using player's blockCoords, type, and orientation temporarily to render the held block.
+	//Using player's blockCoords, type, and orientation temporarily to render the held block.
 	//These variables save those values so we can set them back at the end
 	int savedType = type;
 	int savedOri = orientation;
@@ -524,11 +524,22 @@ void Player::applyLock() {
 
 //Converts player blocks to playfield blocks and starts new drop
 void Player::landBlock() {
+	int blocksAboveVisibleField = 0; //if 4 blocks are above visible playing field after the loop, "lock out" game over
 	for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
 		playfield->grid[20 + y + blockCoords[i][1]][x + blockCoords[i][0]] = type; //sets playfield blocks
+
+		if (20 + y + blockCoords[i][1] < 20) { //checks if block is above the visible playing field
+			blocksAboveVisibleField += 1;
+		}
 	}
 	render(); //render again. otherwise there's 1 frame of it missing
-	startDrop();
+
+	if (blocksAboveVisibleField < NUM_PLAYER_BLOCKS) {
+		startDrop(); //everything fine, start next drop
+	}
+	else {
+		playfield->endGame(); //player locked out, end game
+	}
 }
 
 //debug only - clear playfield of all blocks
