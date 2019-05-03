@@ -220,7 +220,7 @@ void Player::renderPlayer() {
 
 //Update player status. Called once per frame
 void Player::update() {
-	if (playfield->clearing == false) {
+	if (playfield->suspended == false) {
 		processMovement();
 		applyGravity();
 		applyLock();

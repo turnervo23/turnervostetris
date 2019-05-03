@@ -7,14 +7,14 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- 15 rotation/movement limit before lock
-- Game over
+- Game over - 2 conditions - block out, lock out
 - Track lines cleared, later score
 - Speed up as more lines are cleared
 - Rewrite soft drop speed to be a multiple of default gravity
 - Animation for piece lock
 - Ready 3 2 1 go
 - Main menu
+- Sound effects + music
 - Customizable controls
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline

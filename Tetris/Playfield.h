@@ -45,7 +45,7 @@ private:
 	Texture flashTexture;
 	int grid[FIELD_HEIGHT][FIELD_WIDTH]; // holds ids of blocks on grid, not including player?. -1 is empty
 	int x, y; //playfield's location on screen. top-left of highest fully visible row.
-	bool clearing; //if waiting for line clear animation to finish. player doesn't update if this is true
+	bool suspended; //if waiting for line clear animation to finish. player doesn't update if this is true
 	bool linesClearing[FIELD_HEIGHT]; //true if line is being cleared, false otherwise.
 	int lineClearStartFrame;
 	int lineClearCurFrame;
