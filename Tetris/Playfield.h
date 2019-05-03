@@ -47,6 +47,7 @@ private:
 	int x, y; //playfield's location on screen. top-left of highest fully visible row.
 	bool suspended; //if waiting for line clear animation to finish. player doesn't update if this is true
 	bool linesClearing[FIELD_HEIGHT]; //true if line is being cleared, false otherwise.
+	bool lineClearing; //true if ANY line is being cleared
 	int lineClearStartFrame;
 	int lineClearCurFrame;
 

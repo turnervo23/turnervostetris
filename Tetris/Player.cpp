@@ -1,5 +1,6 @@
 #include "Player.h"
 
+//Constructor - sets all initial values for player
 Player::Player(Playfield* p) {
 	playfield = p;
 	level = 1;

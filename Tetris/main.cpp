@@ -16,6 +16,7 @@ What's next on the agenda?
 - Main menu
 - Sound effects + music
 - Customizable controls
+- Turn off automatic key repeating
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
 */

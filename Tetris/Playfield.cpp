@@ -27,8 +27,9 @@ Playfield::Playfield() {
 	heldBlockClip.w = 160;
 	heldBlockClip.h = 72;
 
-	//Initialize linesClearing
 	suspended = false;
+
+	lineClearing = false;
 	for (int r = 0; r < FIELD_HEIGHT; r++) {
 		linesClearing[r] = false;
 	}
@@ -95,7 +96,7 @@ void Playfield::loadTextures() {
 void Playfield::render() {
 	renderPlayfield();
 	renderBlocks();
-	if (suspended == true) {
+	if (lineClearing == true) {
 		renderLineClear();
 	}
 }
@@ -140,8 +141,9 @@ void Playfield::renderBlocks() {
 	}
 }
 
+//Update function for playfield; called every frame
 void Playfield::update() {
-	if (suspended == false) {
+	if (lineClearing == false) {
 		checkLineClear();
 	}
 }
@@ -157,6 +159,7 @@ void Playfield::checkLineClear() {
 			}
 		}
 		if (line == true) { //if line, start line clear animation
+			lineClearing = true;
 			linesClearing[r] = true;
 			suspended = true;
 			lineClearStartFrame = gCurFrame;
@@ -184,6 +187,7 @@ void Playfield::renderLineClear() {
 				linesClearing[r] = false;
 			}
 		}
+		lineClearing = false;
 		suspended = false;
 	}
 	else if ((lineClearCurFrame - lineClearStartFrame) % 2 == 1) { //render flash on odd frames
