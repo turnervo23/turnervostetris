@@ -47,6 +47,7 @@ private:
 
 	Texture textures[NUM_BLOCK_TYPES];
 	Texture flashTexture;
+	//These coordinates are 0-9/0-39, top down, left to right . y=20-39 is visible playing field.
 	int grid[FIELD_HEIGHT][FIELD_WIDTH]; // holds ids of blocks on grid, not including player?. -1 is empty
 	int x, y; //playfield's location on screen. top-left of highest fully visible row.
 	bool suspended; //if waiting for line clear animation to finish. player doesn't update if this is true

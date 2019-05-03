@@ -56,6 +56,7 @@ private:
 	void renderGhostBlock();
 
 	Playfield* playfield; //specifies which playfield the player is on, in case there are multiple players
+	//These coordinates are relative to the VISIBLE playing field. Too lazy to rework it at this point
 	int x, y; // Grid coordinates for center of rotation, except I and O, which in default orientation have the "center" to the left and down
 	int type; // type of block. i/j/l/o/s/t/z correspond to 0-6
 	int orientation; //rotational state. 0 is default, increments as rotates clockwise up to 3, then loops back to 0
