@@ -35,7 +35,7 @@ public:
 	void loadTextures();
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
-	void endGame();
+	void endGame(); //only public for debug
 private:
 	void renderPlayfield();
 	void renderBlocks();

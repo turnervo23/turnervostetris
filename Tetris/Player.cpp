@@ -155,7 +155,11 @@ void Player::setBlockCoords(int a, int b, int c, int d, int e, int f, int g, int
 //Spawn block at initial coordinates
 void Player::spawnBlock() {
 	x = 4; y = -1;
-	if (!isTouchingGround()) { //immediately move one down if nothing in its path
+
+	if (isColliding()) { //game over if spawns in another block's place ("block out")
+		playfield->endGame();
+	}
+	else if (!isTouchingGround()) { //immediately move one down if nothing in its path
 		y++;
 	}
 }
