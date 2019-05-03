@@ -167,6 +167,7 @@ void Playfield::checkLineClear() {
 			linesClearing[r] = true;
 			suspended = true;
 			lineClearStartFrame = gCurFrame;
+			player.incrementNumLinesCleared();
 		}
 	}
 }

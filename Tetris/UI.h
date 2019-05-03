@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
@@ -12,10 +13,12 @@ public:
 	UI(Playfield *p);
 	void setStartTime(int t);
 	void setTime(int t);
+	void setLines(int l);
 	void update();
 	void render();
 private:
 	void renderTime();
+	void renderLines();
 	void renderGameOver();
 
 	Playfield* playfield;
@@ -26,6 +29,11 @@ private:
 	Texture timeTexture;
 	TTF_Font* timeFont;
 	SDL_Color timeTextColor;
+
+	Texture linesTexture;
+	std::string linesStr;
+	TTF_Font* linesFont;
+	SDL_Color linesTextColor;
 	
 	Texture gameOverTexture;
 	std::string gameOverStr;

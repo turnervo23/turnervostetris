@@ -18,6 +18,8 @@ Player::Player(Playfield* p) {
 
 	moveProgress = 0;
 
+	numLinesCleared = 0;
+
 	playfield->player = this;
 }
 
@@ -610,4 +612,14 @@ void Player::processMovement() {
 			moveRight();
 		}
 	}
+}
+
+//Returns the number of lines cleared
+int Player::getNumLinesCleared() {
+	return numLinesCleared;
+}
+
+//Increments the number of lines cleared
+void Player::incrementNumLinesCleared() {
+	numLinesCleared++;
 }

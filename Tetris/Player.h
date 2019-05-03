@@ -3,6 +3,7 @@
 //- rendering the player's blocks on the screen using Playfield::render()
 
 #pragma once
+
 #include <SDL.h>
 #include <queue>
 #include <algorithm>
@@ -32,6 +33,8 @@ public:
 	void startMoveRight();
 	void endMoveLeft();
 	void endMoveRight();
+	int getNumLinesCleared(); //called by UI to update displayed text
+	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
 	void _debug_cyclePiece(); //manually select piece (debug function)
@@ -74,6 +77,7 @@ private:
 	bool holdingRight;
 	int moveProgress; //for autorepeat movement
 	int groundActions; //player piece locks after MAX_GROUND_ACTIONS
+	int numLinesCleared; //tracks number of lines cleared so far this game
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!
