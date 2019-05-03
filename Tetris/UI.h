@@ -5,6 +5,8 @@
 #include "Texture.h"
 #include "Playfield.h"
 
+const int GAME_OVER_TEXT_DELAY = 60;
+
 class UI {
 public:
 	UI(Playfield *p);
@@ -28,4 +30,5 @@ private:
 	Texture gameOverTexture;
 	TTF_Font* gameOverFont;
 	SDL_Color gameOverTextColor;
+	int gameOverTimer; //displays text after GAME_OVER_TEXT_DELAY
 };
