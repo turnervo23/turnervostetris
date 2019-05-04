@@ -7,12 +7,12 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Track lines cleared, later score
-- Speed up as more lines are cleared
+- Speed up as more lines are cleared (track level)
 - Rewrite soft drop speed?
 - Animation for piece lock (piece flash)
 - Ready 3 2 1 go
 - Main menu
+- Track score
 - Sound effects + music
 - Customizable controls
 - Turn off automatic key repeating
