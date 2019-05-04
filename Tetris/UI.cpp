@@ -13,7 +13,7 @@ UI::UI(Playfield* p) {
 	linesTextColor = { 0, 0, 0, 0 };
 
 	gameOverStr = "GAME OVER";
-	gameOverFont = TTF_OpenFont("./font/consola.ttf", 32);
+	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
 	gameOverTextColor = { 0, 0, 0, 0 };
 	gameOverTexture.loadFromText(gameOverStr, gameOverFont, gameOverTextColor);
 	gameOverTimer = 0;

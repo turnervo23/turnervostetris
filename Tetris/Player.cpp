@@ -29,9 +29,6 @@ Player::Player(Playfield* p) {
 void Player::startDrop() {
 	getNextBlock();
 	spawnBlock();
-	setOrientation(0);
-	gravityProgress = 0;
-	groundActions = 0;
 	holdUsed = false; //only if not called by holdBlock()
 }
 
@@ -159,6 +156,9 @@ void Player::setBlockCoords(int a, int b, int c, int d, int e, int f, int g, int
 //Spawn block at initial coordinates
 void Player::spawnBlock() {
 	x = 4; y = -1;
+	setOrientation(0);
+	gravityProgress = 0;
+	groundActions = 0;
 
 	if (isColliding()) { //game over if spawns in another block's place ("block out")
 		playfield->endGame();
@@ -565,8 +565,6 @@ void Player::holdBlock() {
 		if (temp != NO_BLOCK) { //if no held block existed, use next piece
 			type = temp;
 			spawnBlock();
-			setOrientation(0);
-			gravityProgress = 0;
 		}
 		else {
 			startDrop();
