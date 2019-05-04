@@ -10,15 +10,19 @@
 const int GAME_OVER_TEXT_DELAY = 60;
 
 class UI {
+	friend class Playfield;
+	friend class Player;
 public:
 	UI(Playfield *p);
 	void setStartTime(int t);
 	void setTime(int t);
+	void setLevel(int l);
 	void setLines(int l);
 	void update();
 	void render();
 private:
 	void renderTime();
+	void renderLevel();
 	void renderLines();
 	void renderGameOver();
 
@@ -30,6 +34,11 @@ private:
 	Texture timeTexture;
 	TTF_Font* timeFont;
 	SDL_Color timeTextColor;
+
+	Texture levelTexture;
+	std::string levelStr;
+	TTF_Font* levelFont;
+	SDL_Color levelTextColor;
 
 	Texture linesTexture;
 	std::string linesStr;

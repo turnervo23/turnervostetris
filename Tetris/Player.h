@@ -20,6 +20,8 @@ const int LOCK_SPEED = 40; //in frames
 const int MAX_GROUND_ACTIONS = 15;
 
 class Player {
+	friend class Playfield;
+	friend class UI;
 public:
 	Player(Playfield* p);
 	void startDrop();
@@ -34,8 +36,6 @@ public:
 	void startMoveRight();
 	void endMoveLeft();
 	void endMoveRight();
-	int getNumLinesCleared(); //called by UI to update displayed text
-	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
 	void _debug_cyclePiece(); //manually select piece (debug function)
@@ -52,7 +52,10 @@ private:
 	void applyLock();
 	void landBlock();
 	bool wallKick(int prev);
-	void processMovement(); //for autorepeat
+	void processMovement(); //for autorepeat/DAS
+	int getNumLinesCleared(); //called by UI to update displayed text
+	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
+	void updateGravity(); //calculates new gravity value based on level
 
 	void renderPlayer();
 	void renderNextBlocks();

@@ -157,7 +157,7 @@ void Player::setBlockCoords(int a, int b, int c, int d, int e, int f, int g, int
 void Player::spawnBlock() {
 	x = 4; y = -1;
 	setOrientation(0);
-	gravityProgress = 0;
+	gravityProgress = 0.0;
 	groundActions = 0;
 
 	if (isColliding()) { //game over if spawns in another block's place ("block out")
@@ -622,4 +622,13 @@ int Player::getNumLinesCleared() {
 //Increments the number of lines cleared
 void Player::incrementNumLinesCleared() {
 	numLinesCleared++;
+	if (numLinesCleared % 10 == 0 && numLinesCleared <= 140) { //increment level every 10 lines cleared, up to 15
+		level += 1;
+		updateGravity();
+	}
+}
+
+//Calculates new gravity value based on level
+void Player::updateGravity() {
+	gravity = 1.0 / (60.0 * pow(0.8 - (level - 1)*0.007, level - 1));
 }
