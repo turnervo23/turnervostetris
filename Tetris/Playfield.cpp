@@ -101,6 +101,11 @@ void Playfield::loadTextures() {
 	path = "./img/lockflash.png";
 	lockFlashTexture.loadFromFile(path);
 	lockFlashTexture.setAlpha(160);
+
+	//Player glow texture
+	path = "./img/lockflash.png";
+	playerGlowTexture.loadFromFile(path);
+	playerGlowTexture.setAlpha(48);
 }
 
 //Calls all rendering functions
@@ -205,7 +210,7 @@ void Playfield::renderLineClear() {
 		lineClearing = false;
 		suspended = false;
 	}
-	else if ((lineClearCurFrame - lineClearStartFrame) % 2 == 1) { //render flash on odd frames
+	else if ((lineClearCurFrame - lineClearStartFrame) % LINE_CLEAR_FLASH_FREQ == 0) { //render flash every 4 frames
 		for (int r = 0; r < FIELD_HEIGHT; r++) {
 			if (linesClearing[r] == true) {
 				SDL_RenderSetClipRect(gRenderer, &playfieldClip);

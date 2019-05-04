@@ -22,6 +22,7 @@ const int FIELD_WIDTH = 10;
 const int FIELD_HEIGHT = 40;
 const int VISIBLE_FIELD_HEIGHT = 20;
 const int LINE_CLEAR_DELAY = 30; //in frames
+const int LINE_CLEAR_FLASH_FREQ = 4;
 const int LOCK_FLASH_TIME = 10; //in frames
 
 const int NO_BLOCK = -1;
@@ -57,6 +58,7 @@ private:
 	Texture textures[NUM_BLOCK_TYPES];
 	Texture lineFlashTexture;
 	Texture lockFlashTexture;
+	Texture playerGlowTexture;
 	//These coordinates are 0-9/0-39, top down, left to right . y=20-39 is visible playing field.
 	int grid[FIELD_HEIGHT][FIELD_WIDTH]; // holds ids of blocks on grid, not including player?. -1 is empty
 	int x, y; //playfield's location on screen. top-left of highest fully visible row

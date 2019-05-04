@@ -225,6 +225,8 @@ void Player::renderPlayer() {
 	for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
 		playfield->textures[type].render(playfield->x + 32 * (x + blockCoords[i][0]),
 			playfield->y + 32 * (y + blockCoords[i][1]));
+		playfield->playerGlowTexture.render(playfield->x + 32 * (x + blockCoords[i][0]),
+			playfield->y + 32 * (y + blockCoords[i][1]));
 	}
 }
 
