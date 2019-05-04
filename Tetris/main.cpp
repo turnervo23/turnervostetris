@@ -7,17 +7,18 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Speed up as more lines are cleared (track level)
-- Rewrite soft drop speed?
-- Animation for piece lock (piece flash)
+- Track score + types of clears (single, tetris, tspin double, etc)
 - Ready 3 2 1 go
 - Main menu
-- Track score
 - Sound effects + music
 - Customizable controls
 - Turn off automatic key repeating
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
+
+Known bugs:
+- Line clear flash has inconsistent speed. Tied to framerate issues?
+- Piece sometimes locks really quickly after landing. Same as Tetris 99, wtf! I have no idea what the cause is.
 */
 
 #include <SDL.h>

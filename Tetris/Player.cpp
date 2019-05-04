@@ -197,11 +197,8 @@ void Player::moveRight() {
 }
 
 //Speed up gravity temporarily (called on player input)
-void Player::applySoftDrop(bool yes) {
-	if (yes && gravity < SOFT_DROP_G)
-		effGravity = SOFT_DROP_G;
-	else
-		effGravity = gravity;
+void Player::applySoftDrop(bool status) {
+	softDropping = status;
 }
 
 //Land the piece instantly and start the next drop
@@ -242,6 +239,14 @@ void Player::update() {
 
 //Automatically move player down
 void Player::applyGravity() {
+	//Update gravity value
+	gravity = 1.0 / (60.0 * pow(0.8 - (level - 1)*0.007, level - 1));
+	if (softDropping && gravity < SOFT_DROP_G)
+		effGravity = SOFT_DROP_G;
+	else
+		effGravity = gravity;
+
+	//Move player down if possible
 	gravityProgress += effGravity;
 	while (gravityProgress >= 1.0) {
 		if (!isTouchingGround()) {
@@ -539,6 +544,14 @@ void Player::landBlock() {
 	render(); //render again. otherwise there's 1 frame of it missing
 
 	if (blocksAboveVisibleField < NUM_PLAYER_BLOCKS) {
+		//start lock flash animation
+		playfield->lockFlashing = true;
+		playfield->lockFlashStartFrame = gCurFrame;
+		for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
+			playfield->lockFlashX[i] = x + blockCoords[i][0];
+			playfield->lockFlashY[i] = y + blockCoords[i][1];
+		}
+
 		startDrop(); //everything fine, start next drop
 	}
 	else {
@@ -624,11 +637,5 @@ void Player::incrementNumLinesCleared() {
 	numLinesCleared++;
 	if (numLinesCleared % 10 == 0 && numLinesCleared <= 140) { //increment level every 10 lines cleared, up to 15
 		level += 1;
-		updateGravity();
 	}
-}
-
-//Calculates new gravity value based on level
-void Player::updateGravity() {
-	gravity = 1.0 / (60.0 * pow(0.8 - (level - 1)*0.007, level - 1));
 }

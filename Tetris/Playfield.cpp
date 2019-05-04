@@ -94,8 +94,13 @@ void Playfield::loadTextures() {
 	}
 
 	//Line clear flash texture
-	path = "./img/flash.png";
-	flashTexture.loadFromFile(path);
+	path = "./img/lineflash.png";
+	lineFlashTexture.loadFromFile(path);
+
+	//Lock clear flash texture
+	path = "./img/lockflash.png";
+	lockFlashTexture.loadFromFile(path);
+	lockFlashTexture.setAlpha(160);
 }
 
 //Calls all rendering functions
@@ -104,6 +109,9 @@ void Playfield::render() {
 	renderBlocks();
 	if (lineClearing == true) {
 		renderLineClear();
+	}
+	if (lockFlashing == true) {
+		renderLockFlash();
 	}
 }
 
@@ -201,7 +209,7 @@ void Playfield::renderLineClear() {
 		for (int r = 0; r < FIELD_HEIGHT; r++) {
 			if (linesClearing[r] == true) {
 				SDL_RenderSetClipRect(gRenderer, &playfieldClip);
-				flashTexture.render(x, y + (r - 20) * 32);
+				lineFlashTexture.render(x, y + (r - 20) * 32);
 			}
 		}	
 	}
@@ -211,4 +219,19 @@ void Playfield::renderLineClear() {
 void Playfield::endGame() {
 	suspended = true;
 	gameOver = true;
+}
+
+//Render the lock flash texture at the block locations of the recently landed piece
+void Playfield::renderLockFlash() {
+	lockFlashCurFrame = gCurFrame;
+
+	if (lockFlashCurFrame - lockFlashStartFrame >= LOCK_FLASH_TIME) { //animation done
+		lockFlashing = false;
+	}
+	else { //render
+		SDL_RenderSetClipRect(gRenderer, &playfieldClip);
+		for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
+			lockFlashTexture.render(x + 32*lockFlashX[i], y + 32*lockFlashY[i]);
+		}
+	}
 }
