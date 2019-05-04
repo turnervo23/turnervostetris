@@ -8,6 +8,7 @@
 #include "Texture.h"
 
 const int GAME_OVER_TEXT_DELAY = 60;
+const int CLEAR_TYPE_DISPLAY_TIME = 120;
 
 class UI {
 	friend class Playfield;
@@ -19,6 +20,7 @@ public:
 	void setScore(int s);
 	void setLevel(int l);
 	void setLines(int l);
+	void setClearType(std::string ct);
 	void update();
 	void render();
 private:
@@ -26,14 +28,15 @@ private:
 	void renderScore();
 	void renderLevel();
 	void renderLines();
+	void renderClearType();
 	void renderGameOver();
 
 	Playfield* playfield;
 
 	int startTime; //SDL ticks at start
 	int time; //SDL ticks
-	std::string timeStr; //formatted min:sec:ms
 	Texture timeTexture;
+	std::string timeStr; //formatted min:sec:ms
 	TTF_Font* timeFont;
 	SDL_Color timeTextColor;
 
@@ -51,6 +54,12 @@ private:
 	std::string linesStr;
 	TTF_Font* linesFont;
 	SDL_Color linesTextColor;
+
+	Texture clearTypeTexture;
+	std::string clearTypeStr;
+	TTF_Font* clearTypeFont;
+	SDL_Color clearTypeColor;
+	int clearTypeTimer; //displays text for the duration of the timer
 	
 	Texture gameOverTexture;
 	std::string gameOverStr;

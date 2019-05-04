@@ -5,6 +5,7 @@
 //Constructor - sets all initial values for player
 Player::Player(Playfield* p) {
 	playfield = p;
+	score = 0;
 	level = 1;
 	gravity = 1.0 / (60.0 * pow(0.8 - (level - 1)*0.007, level - 1));
 	effGravity = gravity;

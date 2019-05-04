@@ -22,6 +22,10 @@ UI::UI(Playfield* p) {
 	linesTextColor = { 0, 0, 0, 0 };
 	setLines(0);
 
+	clearTypeFont = TTF_OpenFont("./font/consola.ttf", 16);
+	clearTypeColor = { 0, 0, 0, 0 };
+	clearTypeTimer = CLEAR_TYPE_DISPLAY_TIME + 1;
+
 	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
 	gameOverTextColor = { 0, 0, 0, 0 };
@@ -34,6 +38,9 @@ void UI::render() {
 	renderScore();
 	renderLevel();
 	renderLines();
+	if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
+		renderClearType();
+	}
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
 		renderGameOver();
 	}
@@ -81,10 +88,16 @@ void UI::renderTime() {
 void UI::update() {
 	if (playfield->gameOver == false) {
 		setTime(SDL_GetTicks() - startTime); //update time unless game is over
+		setScore(playfield->player->score);
 		setLevel(playfield->player->level);
 		setLines(playfield->player->getNumLinesCleared());
 	}
-	else { //game over, start timer
+	else {
+		//clear type timer
+		if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
+			clearTypeTimer += 1;
+		}
+		//game over timer
 		if (gameOverTimer < GAME_OVER_TEXT_DELAY) {
 			gameOverTimer += 1;
 		}
@@ -134,4 +147,16 @@ void UI::setLines(int l) {
 void UI::renderLines() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	linesTexture.render(playfield->x - 150, playfield->y + 196);
+}
+
+//Sets the "clear type" (i.e. single, double, tetris, t-spin)
+void UI::setClearType(std::string ct) {
+	clearTypeStr = ct + "!";
+	clearTypeTexture.loadFromText(clearTypeStr, clearTypeFont, clearTypeColor);
+}
+
+//Renders the clear type (only called after recent clear)
+void UI::renderClearType() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	clearTypeTexture.render(playfield->x - 150, playfield->y + 228);
 }

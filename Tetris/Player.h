@@ -67,6 +67,7 @@ private:
 	int type; // type of block. i/j/l/o/s/t/z correspond to 0-6
 	int orientation; //rotational state. 0 is default, increments as rotates clockwise up to 3, then loops back to 0
 	int blockCoords[NUM_PLAYER_BLOCKS][NUM_DIMENSIONS]; //array of relative grid coords filled by player block. initially stored left->right top->bottom
+	int score; //player score earned from clearing lines
 	int level; //determines gravity
 	double gravity; //corresponding to "G" values on wiki. automatically calculated from level
 	double effGravity; //may be more than gravity if soft drop is active
