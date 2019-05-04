@@ -8,12 +8,19 @@ UI::UI(Playfield* p) {
 
 	timeFont = TTF_OpenFont("./font/consola.ttf", 16);
 	timeTextColor = { 0, 0, 0, 0 };
+	setTime(0);
+
+	scoreFont = TTF_OpenFont("./font/consola.ttf", 16);
+	scoreTextColor = { 0, 0, 0, 0 };
+	setScore(0);
 
 	levelFont = TTF_OpenFont("./font/consola.ttf", 16);
 	levelTextColor = { 0, 0, 0, 0 };
+	setLevel(0);
 
 	linesFont = TTF_OpenFont("./font/consola.ttf", 16);
 	linesTextColor = { 0, 0, 0, 0 };
+	setLines(0);
 
 	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
@@ -24,6 +31,7 @@ UI::UI(Playfield* p) {
 
 void UI::render() {
 	renderTime();
+	renderScore();
 	renderLevel();
 	renderLines();
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
@@ -92,6 +100,18 @@ void UI::renderGameOver() {
 	gameOverTexture.render(playfield->x + 160 - w/2, playfield->y + 100);
 }
 
+//Sets the score. Obtained from this->playfield->player
+void UI::setScore(int s) {
+	scoreStr = "Score: " + std::to_string(s);
+	scoreTexture.loadFromText(scoreStr, scoreFont, scoreTextColor);
+}
+
+//Renders the score
+void UI::renderScore() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	scoreTexture.render(playfield->x - 150, playfield->y + 132);
+}
+
 //Sets the player level. Obtained from this->playfield->player
 void UI::setLevel(int l) {
 	levelStr = "Level: " + std::to_string(l);
@@ -101,7 +121,7 @@ void UI::setLevel(int l) {
 //Renders the player level
 void UI::renderLevel() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	levelTexture.render(playfield->x - 150, playfield->y + 132);
+	levelTexture.render(playfield->x - 150, playfield->y + 164);
 }
 
 //Sets the number of lines cleared. Obtained from this->playfield->player
@@ -113,5 +133,5 @@ void UI::setLines(int l) {
 //Renders the number of lines cleared
 void UI::renderLines() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	linesTexture.render(playfield->x - 150, playfield->y + 164);
+	linesTexture.render(playfield->x - 150, playfield->y + 196);
 }

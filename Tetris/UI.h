@@ -16,12 +16,14 @@ public:
 	UI(Playfield *p);
 	void setStartTime(int t);
 	void setTime(int t);
+	void setScore(int s);
 	void setLevel(int l);
 	void setLines(int l);
 	void update();
 	void render();
 private:
 	void renderTime();
+	void renderScore();
 	void renderLevel();
 	void renderLines();
 	void renderGameOver();
@@ -34,6 +36,11 @@ private:
 	Texture timeTexture;
 	TTF_Font* timeFont;
 	SDL_Color timeTextColor;
+
+	Texture scoreTexture;
+	std::string scoreStr;
+	TTF_Font* scoreFont;
+	SDL_Color scoreTextColor;
 
 	Texture levelTexture;
 	std::string levelStr;

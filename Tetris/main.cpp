@@ -7,7 +7,6 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Highlight the player's block slightly
 - Track score + types of clears (single, tetris, tspin double, etc)
 - Ready 3 2 1 go
 - Main menu
