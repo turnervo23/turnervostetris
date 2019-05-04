@@ -170,6 +170,7 @@ void Playfield::update() {
 //Clear any lines made. No scoring implemented yet
 void Playfield::checkLineClear() {
 	bool line;
+	int numLinesClearedAtOnce = 0; //tracks the number of lines cleared at once for scoring
 	for (int r = 0; r < FIELD_HEIGHT; r++) { //for each row, check if line
 		line = true;
 		for (int c = 0; c < FIELD_WIDTH; c++) { //if any in row NO_BLOCK, no line
@@ -178,12 +179,31 @@ void Playfield::checkLineClear() {
 			}
 		}
 		if (line == true) { //if line, start line clear animation
+			numLinesClearedAtOnce += 1;
 			lineClearing = true;
 			linesClearing[r] = true;
 			suspended = true;
 			lineClearStartFrame = gCurFrame;
 			player->incrementNumLinesCleared();
 		}
+	}
+
+	//Tally player score for lines cleared
+	if (numLinesClearedAtOnce == 1) { //single
+		player->score += 100 * player->level;
+		ui->setClearType("Single");
+	}
+	else if (numLinesClearedAtOnce == 2) { //double
+		player->score += 200 * player->level;
+		ui->setClearType("Double");
+	}
+	else if (numLinesClearedAtOnce == 3) { //triple
+		player->score += 300 * player->level;
+		ui->setClearType("Triple");
+	}
+	else if (numLinesClearedAtOnce == 4) { //tetris
+		player->score += 500 * player->level;
+		ui->setClearType("Tetris");
 	}
 }
 

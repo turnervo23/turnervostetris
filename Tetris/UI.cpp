@@ -24,7 +24,7 @@ UI::UI(Playfield* p) {
 
 	clearTypeFont = TTF_OpenFont("./font/consola.ttf", 16);
 	clearTypeColor = { 0, 0, 0, 0 };
-	clearTypeTimer = CLEAR_TYPE_DISPLAY_TIME + 1;
+	clearTypeTimer = CLEAR_TYPE_DISPLAY_TIME;
 
 	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
@@ -85,18 +85,20 @@ void UI::renderTime() {
 	timeTexture.render(playfield->x - 150, playfield->y + 100);
 }
 
+//Update function, called once per frame
 void UI::update() {
 	if (playfield->gameOver == false) {
 		setTime(SDL_GetTicks() - startTime); //update time unless game is over
 		setScore(playfield->player->score);
 		setLevel(playfield->player->level);
 		setLines(playfield->player->getNumLinesCleared());
-	}
-	else {
+
 		//clear type timer
 		if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 			clearTypeTimer += 1;
 		}
+	}
+	else {
 		//game over timer
 		if (gameOverTimer < GAME_OVER_TEXT_DELAY) {
 			gameOverTimer += 1;
@@ -153,6 +155,7 @@ void UI::renderLines() {
 void UI::setClearType(std::string ct) {
 	clearTypeStr = ct + "!";
 	clearTypeTexture.loadFromText(clearTypeStr, clearTypeFont, clearTypeColor);
+	clearTypeTimer = 0;
 }
 
 //Renders the clear type (only called after recent clear)
