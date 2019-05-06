@@ -19,6 +19,13 @@ const double SOFT_DROP_G = 0.5; //moves down this amount per frame
 const int LOCK_SPEED = 40; //in frames
 const int MAX_GROUND_ACTIONS = 15;
 
+//Used to track last action (for T-spin checking)
+enum Actions {
+	MOVE,
+	ROTATE,
+	DROP
+};
+
 class Player {
 	friend class Playfield;
 	friend class UI;
@@ -83,6 +90,7 @@ private:
 	int groundActions; //player piece locks after MAX_GROUND_ACTIONS
 	int numLinesCleared; //tracks number of lines cleared so far this game
 	bool softDropping; //tracks whether soft drop button is pressed
+	int prevAction; //tracks the previous "action" made by the player piece - move, rotate, or drop (see enum)
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!

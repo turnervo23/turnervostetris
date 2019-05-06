@@ -177,6 +177,7 @@ void Player::moveLeft() {
 	}
 	else {
 		lockProgress = 0;
+		prevAction = MOVE;
 		if (isTouchingGround()) {
 			groundActions += 1; //only so many ground actions before lock
 		}
@@ -191,6 +192,7 @@ void Player::moveRight() {
 	}
 	else {
 		lockProgress = 0;
+		prevAction = MOVE;
 		if (isTouchingGround()) {
 			groundActions += 1; //only so many ground actions before lock
 		}
@@ -254,6 +256,7 @@ void Player::applyGravity() {
 	while (gravityProgress >= 1.0) {
 		if (!isTouchingGround()) {
 			y += 1;
+			prevAction = DROP;
 		}
 		gravityProgress -= 1.0;
 	}
@@ -292,6 +295,7 @@ void Player::rotateLeft() {
 		}
 		else {
 			lockProgress = 0; //reset lock progress if success
+			prevAction = ROTATE;
 			if (isTouchingGround()) {
 				groundActions += 1; //only so many ground actions before lock
 			}
@@ -332,6 +336,7 @@ void Player::rotateRight() {
 		}
 		else {
 			lockProgress = 0; //reset lock delay if success
+			prevAction = ROTATE;
 			if (isTouchingGround()) {
 				groundActions += 1; //only so many ground actions before lock
 			}
