@@ -210,6 +210,7 @@ void Player::hardDrop() {
 		while (!isTouchingGround()) {
 			y++;
 			prevAction = DROP;
+			addScore(2); //points for hard dropping			
 		}
 		landBlock();
 	}
@@ -258,6 +259,11 @@ void Player::applyGravity() {
 		if (!isTouchingGround()) {
 			y += 1;
 			prevAction = DROP;
+
+			//Points for soft dropping
+			if (softDropping == true) {
+				addScore(1);
+			}
 		}
 		gravityProgress -= 1.0;
 	}
