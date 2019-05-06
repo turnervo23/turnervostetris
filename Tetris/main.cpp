@@ -19,6 +19,7 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 Known bugs:
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Piece sometimes locks really quickly after landing. Same as Tetris 99, wtf! I have no idea what the cause is.
+- For now, there is no distinction between a T-spin and a T-spin mini. Both are counted as regular T-spins.
 */
 
 #include <SDL.h>

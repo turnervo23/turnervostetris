@@ -650,6 +650,11 @@ void Player::processMovement() {
 	}
 }
 
+//Adds s to score
+void Player::addScore(int s) {
+	score += s;
+}
+
 //Returns the number of lines cleared
 int Player::getNumLinesCleared() {
 	return numLinesCleared;

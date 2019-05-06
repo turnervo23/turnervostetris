@@ -191,20 +191,51 @@ void Playfield::checkLineClear() {
 	}
 
 	//Tally player score for lines cleared
-	if (numLinesClearedAtOnce == 1) { //single
-		player->score += 100 * player->level;
-		ui->setClearType("Single");
+	if (numLinesClearedAtOnce == 0) { //no clear
+		//T-Spin
+		if (player->tSpin == true) {
+			player->addScore(400 * player->level);
+			ui->setClearType("T-Spin");
+		}
+	}
+	else if (numLinesClearedAtOnce == 1) { //single
+		//T-Spin single
+		if (player->tSpin == true) {
+			player->addScore(800 * player->level);
+			ui->setClearType("T-Spin Single");
+		}
+		//Single
+		else {
+			player->addScore(100 * player->level);
+			ui->setClearType("Single");
+		}
 	}
 	else if (numLinesClearedAtOnce == 2) { //double
-		player->score += 200 * player->level;
-		ui->setClearType("Double");
+		//T-Spin double
+		if (player->tSpin == true) {
+			player->addScore(1200 * player->level);
+			ui->setClearType("T-Spin Double");
+		}
+		//Double
+		else {
+			player->addScore(300 * player->level);
+			ui->setClearType("Double");
+		}
 	}
 	else if (numLinesClearedAtOnce == 3) { //triple
-		player->score += 300 * player->level;
-		ui->setClearType("Triple");
+		//T-Spin triple
+		if (player->tSpin == true) {
+			player->addScore(1600 * player->level);
+			ui->setClearType("T-Spin Triple");
+		}
+		//Triple
+		else {
+			player->addScore(500 * player->level);
+			ui->setClearType("Triple");
+		}
 	}
 	else if (numLinesClearedAtOnce == 4) { //tetris
-		player->score += 500 * player->level;
+		player->addScore(800 * player->level);
 		ui->setClearType("Tetris");
 	}
 }

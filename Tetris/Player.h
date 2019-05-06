@@ -60,6 +60,7 @@ private:
 	void landBlock();
 	bool wallKick(int prev);
 	void processMovement(); //for autorepeat/DAS
+	void addScore(int);
 	int getNumLinesCleared(); //called by UI to update displayed text
 	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
 	bool tSpinThreeCornersOccupied();
