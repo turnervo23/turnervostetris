@@ -350,7 +350,7 @@ bool Player::isColliding() {
 	bool result = false;
 	for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
 		if (playfield->grid[20 + y + blockCoords[i][1]][x + blockCoords[i][0]] != NO_BLOCK //playfield block collision
-			|| 20 + y + blockCoords[i][1] >= 40 //below bottom of screen
+			|| 20 + y + blockCoords[i][1] >= FIELD_HEIGHT //below bottom of screen
 			|| x + blockCoords[i][0] <= -1 //past left of screen
 			|| x + blockCoords[i][0] >= FIELD_WIDTH) { //past right of screen
 			result = true;
@@ -552,6 +552,7 @@ void Player::landBlock() {
 	}
 	render(); //render again. otherwise there's 1 frame of it missing
 
+	//Land successful
 	if (blocksAboveVisibleField < NUM_PLAYER_BLOCKS) {
 		//start lock flash animation
 		playfield->lockFlashing = true;
@@ -561,7 +562,17 @@ void Player::landBlock() {
 			playfield->lockFlashY[i] = y + blockCoords[i][1];
 		}
 
-		startDrop(); //everything fine, start next drop
+		//T-spin check
+		if (type == T_BLOCK
+			&& prevAction == ROTATE
+			&& tSpinThreeCornersOccupied()) {
+			tSpin = true;
+		}
+		else {
+			tSpin = false;
+		}
+
+		startDrop(); //start next drop
 	}
 	else {
 		playfield->endGame(); //player locked out, end game
@@ -646,5 +657,28 @@ void Player::incrementNumLinesCleared() {
 	numLinesCleared++;
 	if (numLinesCleared % 10 == 0 && numLinesCleared <= 140) { //increment level every 10 lines cleared, up to 15
 		level += 1;
+	}
+}
+
+//Checks whether 3 corners around a T block are occupied. One of the conditions for a T-spin
+bool Player::tSpinThreeCornersOccupied() {
+	int numCornersOccupied = 0;
+	int cornerCoords[4][2] = { {-1, -1}, {1, -1}, {-1, 1}, {1, 1} };
+
+	//Checks each corner to see if it is occupied
+	for (int i = 0; i < 4; i++) {
+		if (playfield->grid[20 + y + cornerCoords[i][1]][x + cornerCoords[i][0]] != NO_BLOCK
+			|| 20 + y + cornerCoords[i][1] >= FIELD_HEIGHT //below bottom of screen
+			|| x + cornerCoords[i][0] <= -1 //past left of screen
+			|| x + cornerCoords[i][0] >= FIELD_WIDTH) { //past right of screen)
+			numCornersOccupied += 1;
+		}
+	}
+
+	if (numCornersOccupied == 3) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }
