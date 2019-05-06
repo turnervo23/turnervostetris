@@ -162,9 +162,11 @@ void Playfield::renderBlocks() {
 
 //Update function for playfield; called every frame
 void Playfield::update() {
+	/*
 	if (lineClearing == false) {
 		checkLineClear();
 	}
+	*/
 }
 
 //Clear any lines made. No scoring implemented yet

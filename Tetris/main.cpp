@@ -199,7 +199,7 @@ int main(int argc, char* args[])
 			}
 
 			//Update objects
-			playfield1.update();
+			//playfield1.update();
 			player1.update();
 			ui1.update();
 		}

@@ -572,6 +572,9 @@ void Player::landBlock() {
 			tSpin = false;
 		}
 
+		//Check for line clear
+		playfield->checkLineClear();
+
 		startDrop(); //start next drop
 	}
 	else {
