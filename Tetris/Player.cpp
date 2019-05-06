@@ -209,6 +209,7 @@ void Player::hardDrop() {
 	if (!playfield->suspended) {
 		while (!isTouchingGround()) {
 			y++;
+			prevAction = DROP;
 		}
 		landBlock();
 	}
