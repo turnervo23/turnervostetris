@@ -37,6 +37,8 @@ Playfield::Playfield() {
 		linesClearing[r] = false;
 	}
 
+	backToBack = false;
+
 	player = NULL;
 	ui = NULL;
 }
@@ -198,11 +200,25 @@ void Playfield::checkLineClear() {
 		if (player->tSpin == true) {
 			player->addScore(400 * player->level);
 			ui->setClearType("T-Spin");
+			backToBack = true;
 		}
 		//T-Spin Mini
 		else if (player->tSpinMini == true) {
-			player->addScore(100 * player->level);
-			ui->setClearType("T-Spin Mini");
+			//B2B
+			if (backToBack == true) {
+				player->addScore(150 * player->level);
+				ui->setClearType("Back-to-Back\nT-Spin Mini");
+			}
+			//No B2B
+			else {
+				player->addScore(100 * player->level);
+				ui->setClearType("T-Spin Mini");
+			}
+			backToBack = true;
+		}
+		//Nothing
+		else {
+			backToBack = false;
 		}
 
 		player->resetCombo();
@@ -210,49 +226,89 @@ void Playfield::checkLineClear() {
 	else if (numLinesClearedAtOnce == 1) { //single
 		//T-Spin Single
 		if (player->tSpin == true) {
-			player->addScore(800 * player->level);
-			ui->setClearType("T-Spin Single");
+			//B2B
+			if (backToBack == true) {
+				player->addScore(1200 * player->level);
+				ui->setClearType("Back-to-Back\nT-Spin Single");
+			}
+			//No B2B
+			else {
+				player->addScore(800 * player->level);
+				ui->setClearType("T-Spin Single");
+			}
+			backToBack = true;
 		}
 		//Mini T-Spin Single
 		else if (player->tSpinMini == true) {
 			player->addScore(200 * player->level);
 			ui->setClearType("Mini T-Spin\nSingle");
+			backToBack = true;
 		}
 		//Single
 		else {
 			player->addScore(100 * player->level);
 			ui->setClearType("Single");
+			backToBack = false;
 		}
 	}
 	else if (numLinesClearedAtOnce == 2) { //double
 		//T-Spin double
 		if (player->tSpin == true
 			|| player->tSpinMini == true) {
-			player->addScore(1200 * player->level);
-			ui->setClearType("T-Spin Double");
+			//B2B
+			if (backToBack == true) {
+				player->addScore(1800 * player->level);
+				ui->setClearType("Back-to-Back\nT-Spin Double");
+			}
+			//No B2B
+			else {
+				player->addScore(1200 * player->level);
+				ui->setClearType("T-Spin Double");
+			}
+			backToBack = true;
 		}
 		//Double
 		else {
 			player->addScore(300 * player->level);
 			ui->setClearType("Double");
+			backToBack = false;
 		}
 	}
 	else if (numLinesClearedAtOnce == 3) { //triple
 		//T-Spin triple
 		if (player->tSpin == true
 			|| player->tSpinMini == true) {
-			player->addScore(1600 * player->level);
-			ui->setClearType("T-Spin Triple");
+			//B2B
+			if (backToBack == true) {
+				player->addScore(2400 * player->level);
+				ui->setClearType("Back-to-Back\nT-Spin Triple");
+			}
+			else {
+				player->addScore(1600 * player->level);
+				ui->setClearType("T-Spin Triple");
+			}
+			backToBack = true;
 		}
 		//Triple
 		else {
 			player->addScore(500 * player->level);
 			ui->setClearType("Triple");
+			backToBack = false;
 		}
 	}
 	else if (numLinesClearedAtOnce == 4) { //tetris
-		player->addScore(800 * player->level);
-		ui->setClearType("Tetris");
+		//B2B
+		if (backToBack == true) {
+			player->addScore(1200 * player->level);
+			ui->setClearType("Back-to-Back\nTetris");
+			backToBack = true;
+		}
+		//No B2B
+		else {
+			player->addScore(800 * player->level);
+			ui->setClearType("Tetris");
+			backToBack = true;
+		}
 	}
 
 	//Combo points

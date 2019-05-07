@@ -69,6 +69,7 @@ private:
 	bool lineClearing; //true if ANY line is being cleared
 	int lineClearStartFrame;
 	int lineClearCurFrame;
+	bool backToBack; //tracks whether the previous clear (or T-Spin) continues back-to-back chain
 
 	bool lockFlashing; //whether "lock flash" is occurring (animation for piece lock)
 	int lockFlashX[NUM_PLAYER_BLOCKS];

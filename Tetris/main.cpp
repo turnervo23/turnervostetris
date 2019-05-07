@@ -7,7 +7,7 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Add scoring for T-spin mini, B2B
+- Add scoring for B2B
 T-spin mini notes - from http://kitaru.1101b.com/tc/mini.html:
 "a t-spin is mini if there is an open corner on the point-end,
 it clears one line or less, or reached its final (x,y) position by way of the t-spin triple wall kick"
