@@ -11,7 +11,7 @@ What's next on the agenda?
 T-spin mini notes - from http://kitaru.1101b.com/tc/mini.html:
 "a t-spin is mini if there is an open corner on the point-end,
 it clears one line or less, or reached its final (x,y) position by way of the t-spin triple wall kick"
-I think the last one is the opposite - DIDN'T reach its final position with TST twist.
+I think the last one is the opposite - DIDN'T reach its final position with TST twist, but with another wall kick
 - Ready 3 2 1 go
 - Main menu
 - Sound effects + music

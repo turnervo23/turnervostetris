@@ -584,7 +584,17 @@ void Player::landBlock() {
 		if (type == T_BLOCK
 			&& prevAction == ROTATE
 			&& tSpinThreeCornersOccupied()) {
-			tSpin = true;
+			//T-spin mini
+			if (tSpinUnoccupiedByPoint()
+				&& tstTwist == false) {
+				tSpinMini = true;
+				tSpin = false;
+			}
+			//Regular T-spin
+			else {
+				tSpin = true;
+				tSpinMini = false;
+			}
 		}
 		else {
 			tSpin = false;
@@ -717,4 +727,35 @@ void Player::incrementCombo() {
 //Resets the combo to 0. Called by playfield after land with no line clear
 void Player::resetCombo() {
 	combo = 0;
+}
+
+//Checks if one of the spaces next to the T block's "point" are empty. 1st T-spin mini check
+bool Player::tSpinUnoccupiedByPoint() {
+	switch (orientation) {
+	case 0:
+		if (playfield->grid[20 + y - 1][x - 1] == NO_BLOCK
+			|| playfield->grid[20 + y - 1][x + 1] == NO_BLOCK) {
+			return true;
+		}
+		break;
+	case 1:
+		if (playfield->grid[20 + y - 1][x + 1] == NO_BLOCK
+			|| playfield->grid[20 + y + 1][x + 1] == NO_BLOCK) {
+			return true;
+		}
+		break;
+	case 2:
+		if (playfield->grid[20 + y + 1][x - 1] == NO_BLOCK
+			|| playfield->grid[20 + y + 1][x + 1] == NO_BLOCK) {
+			return true;
+		}
+		break;
+	case 3:
+		if (playfield->grid[20 + y - 1][x - 1] == NO_BLOCK
+			|| playfield->grid[20 + y + 1][x - 1] == NO_BLOCK) {
+			return true;
+		}
+		break;
+	}
+	return false;
 }

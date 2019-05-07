@@ -66,6 +66,7 @@ private:
 	int getNumLinesCleared(); //called by UI to update displayed text
 	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
 	bool tSpinThreeCornersOccupied();
+	bool tSpinUnoccupiedByPoint();
 
 	void renderPlayer();
 	void renderNextBlocks();
@@ -96,8 +97,9 @@ private:
 	bool softDropping; //tracks whether soft drop button is pressed
 	int prevAction; //tracks the previous "action" made by the player piece - move, rotate, or drop (see enum)
 	bool tSpin; //tracks whether a T-spin was performed on the most recent drop
+	bool tSpinMini; //tracks whether a T-spin mini was performed on the most recent drop
+	bool tstTwist; //tracks whether a "T-spin triple twist" was performed on last rotation (part of T-spin mini test)
 	int combo;
-	bool tstTwist; //tracks whether a "T-spin triple twist" was performed on last rotation
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!
