@@ -47,8 +47,8 @@ bool Texture::loadFromFile(std::string path){
 bool Texture::loadFromText(std::string text, TTF_Font* font, SDL_Color color) {
 	free();
 	SDL_Texture* newTexture = NULL;
-
-	SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), color);
+	
+	SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(font, text.c_str(), color, 1000);
 	if (textSurface == NULL) {
 		printf("Unable to create text surface! TTF Error: %s\n", TTF_GetError());
 		return false;

@@ -598,6 +598,7 @@ void Player::landBlock() {
 		}
 		else {
 			tSpin = false;
+			tSpinMini = false;
 		}
 
 		//Check for line clear

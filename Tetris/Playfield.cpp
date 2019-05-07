@@ -199,14 +199,24 @@ void Playfield::checkLineClear() {
 			player->addScore(400 * player->level);
 			ui->setClearType("T-Spin");
 		}
+		//T-Spin Mini
+		else if (player->tSpinMini == true) {
+			player->addScore(100 * player->level);
+			ui->setClearType("T-Spin Mini");
+		}
 
 		player->resetCombo();
 	}
 	else if (numLinesClearedAtOnce == 1) { //single
-		//T-Spin single
+		//T-Spin Single
 		if (player->tSpin == true) {
 			player->addScore(800 * player->level);
 			ui->setClearType("T-Spin Single");
+		}
+		//Mini T-Spin Single
+		else if (player->tSpinMini == true) {
+			player->addScore(200 * player->level);
+			ui->setClearType("Mini T-Spin\nSingle");
 		}
 		//Single
 		else {
@@ -216,7 +226,8 @@ void Playfield::checkLineClear() {
 	}
 	else if (numLinesClearedAtOnce == 2) { //double
 		//T-Spin double
-		if (player->tSpin == true) {
+		if (player->tSpin == true
+			|| player->tSpinMini == true) {
 			player->addScore(1200 * player->level);
 			ui->setClearType("T-Spin Double");
 		}
@@ -228,7 +239,8 @@ void Playfield::checkLineClear() {
 	}
 	else if (numLinesClearedAtOnce == 3) { //triple
 		//T-Spin triple
-		if (player->tSpin == true) {
+		if (player->tSpin == true
+			|| player->tSpinMini == true) {
 			player->addScore(1600 * player->level);
 			ui->setClearType("T-Spin Triple");
 		}
