@@ -97,6 +97,7 @@ private:
 	int prevAction; //tracks the previous "action" made by the player piece - move, rotate, or drop (see enum)
 	bool tSpin; //tracks whether a T-spin was performed on the most recent drop
 	int combo;
+	bool tstTwist; //tracks whether a "T-spin triple twist" was performed on last rotation
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!

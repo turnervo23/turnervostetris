@@ -23,6 +23,7 @@ Player::Player(Playfield* p) {
 	playfield->player = this;
 	tSpin = false;
 	combo = 0;
+	tstTwist = false;
 }
 
 //Spawn player block at top of the screen as "next" piece
@@ -176,6 +177,7 @@ void Player::moveLeft() {
 	}
 	else {
 		lockProgress = 0;
+		tstTwist = false;
 		prevAction = MOVE;
 		if (isTouchingGround()) {
 			groundActions += 1; //only so many ground actions before lock
@@ -191,6 +193,7 @@ void Player::moveRight() {
 	}
 	else {
 		lockProgress = 0;
+		tstTwist = false;
 		prevAction = MOVE;
 		if (isTouchingGround()) {
 			groundActions += 1; //only so many ground actions before lock
@@ -208,6 +211,7 @@ void Player::hardDrop() {
 	if (!playfield->suspended) {
 		while (!isTouchingGround()) {
 			y++;
+			tstTwist = false;
 			prevAction = DROP;
 			addScore(2); //points for hard dropping			
 		}
@@ -257,6 +261,7 @@ void Player::applyGravity() {
 	while (gravityProgress >= 1.0) {
 		if (!isTouchingGround()) {
 			y += 1;
+			tstTwist = false;
 			prevAction = DROP;
 
 			//Points for soft dropping
@@ -296,6 +301,7 @@ void Player::rotateLeft() {
 		}
 		setOrientation(orientation);
 
+		tstTwist = false; //For 3rd T-spin mini test
 		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
 			rotateRight();
 		}
@@ -337,6 +343,7 @@ void Player::rotateRight() {
 		}
 		setOrientation(orientation);
 
+		tstTwist = false; //For 3rd T-spin mini test
 		if (isColliding() && !wallKick(prev)) { //wall kick or undo rotation
 			rotateLeft();
 		}
@@ -399,7 +406,13 @@ bool Player::wallKick(int prev) {
 		for (int col = 0; col < 4; col++) {
 			x += wallKickData_JLSTZ[row][col][0];
 			y += wallKickData_JLSTZ[row][col][1];
-			if (!isColliding()) { return true; } //if no collision after new coord check, return true and use new coords
+			if (!isColliding()) { //if no collision after new coord check, return true and use new coords
+				//T-spin mini check #3 (TST twist)
+				if (type == T_BLOCK && col == 3) {
+					tstTwist = true;
+				}
+				return true;
+			}
 			x = origX;
 			y = origY;
 		}
