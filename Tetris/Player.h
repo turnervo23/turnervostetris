@@ -61,6 +61,8 @@ private:
 	bool wallKick(int prev);
 	void processMovement(); //for autorepeat/DAS
 	void addScore(int);
+	void incrementCombo();
+	void resetCombo();
 	int getNumLinesCleared(); //called by UI to update displayed text
 	void incrementNumLinesCleared(); //called by Playfield to update numLinesCleared
 	bool tSpinThreeCornersOccupied();
@@ -94,6 +96,7 @@ private:
 	bool softDropping; //tracks whether soft drop button is pressed
 	int prevAction; //tracks the previous "action" made by the player piece - move, rotate, or drop (see enum)
 	bool tSpin; //tracks whether a T-spin was performed on the most recent drop
+	int combo;
 
 	//wall kick tables, not including test 1
 	//still need to check all of these work as expected!

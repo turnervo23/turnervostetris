@@ -169,7 +169,7 @@ void Playfield::update() {
 	*/
 }
 
-//Clear any lines made. No scoring implemented yet
+//Clear any lines made. Called after a block is landed.
 void Playfield::checkLineClear() {
 	bool line;
 	int numLinesClearedAtOnce = 0; //tracks the number of lines cleared at once for scoring
@@ -180,7 +180,8 @@ void Playfield::checkLineClear() {
 				line = false;
 			}
 		}
-		if (line == true) { //if line, start line clear animation
+
+		if (line == true) {
 			numLinesClearedAtOnce += 1;
 			lineClearing = true;
 			linesClearing[r] = true;
@@ -191,12 +192,15 @@ void Playfield::checkLineClear() {
 	}
 
 	//Tally player score for lines cleared
+	player->incrementCombo(); //gets undone if no line made
 	if (numLinesClearedAtOnce == 0) { //no clear
 		//T-Spin
 		if (player->tSpin == true) {
 			player->addScore(400 * player->level);
 			ui->setClearType("T-Spin");
 		}
+
+		player->resetCombo();
 	}
 	else if (numLinesClearedAtOnce == 1) { //single
 		//T-Spin single
@@ -237,6 +241,12 @@ void Playfield::checkLineClear() {
 	else if (numLinesClearedAtOnce == 4) { //tetris
 		player->addScore(800 * player->level);
 		ui->setClearType("Tetris");
+	}
+
+	//Combo points
+	if (player->combo >= 2) {
+		player->addScore(50 * (player->combo - 1) * player->level);
+		ui->setCombo(player->combo);
 	}
 }
 

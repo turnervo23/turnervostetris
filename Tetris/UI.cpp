@@ -26,6 +26,10 @@ UI::UI(Playfield* p) {
 	clearTypeColor = { 0, 0, 0, 0 };
 	clearTypeTimer = CLEAR_TYPE_DISPLAY_TIME;
 
+	comboFont = TTF_OpenFont("./font/consola.ttf", 16);
+	comboTextColor = { 0, 0, 0, 0 };
+	setCombo(0);
+
 	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
 	gameOverTextColor = { 0, 0, 0, 0 };
@@ -40,6 +44,9 @@ void UI::render() {
 	renderLines();
 	if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 		renderClearType();
+	}
+	if (playfield->player->combo >= 2) {
+		renderCombo();
 	}
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
 		renderGameOver();
@@ -162,4 +169,16 @@ void UI::setClearType(std::string ct) {
 void UI::renderClearType() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	clearTypeTexture.render(playfield->x - 150, playfield->y + 228);
+}
+
+//Sets the combo value
+void UI::setCombo(int c) {
+	comboStr = "Combo: " + std::to_string(playfield->player->combo);
+	comboTexture.loadFromText(comboStr, comboFont, comboTextColor);
+}
+
+//Renders the combo value
+void UI::renderCombo() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	comboTexture.render(playfield->x - 150, playfield->y + 260);
 }

@@ -21,6 +21,7 @@ public:
 	void setLevel(int l);
 	void setLines(int l);
 	void setClearType(std::string ct);
+	void setCombo(int c);
 	void update();
 	void render();
 private:
@@ -29,6 +30,7 @@ private:
 	void renderLevel();
 	void renderLines();
 	void renderClearType();
+	void renderCombo();
 	void renderGameOver();
 
 	Playfield* playfield;
@@ -60,6 +62,11 @@ private:
 	TTF_Font* clearTypeFont;
 	SDL_Color clearTypeColor;
 	int clearTypeTimer; //displays text for the duration of the timer
+
+	Texture comboTexture;
+	std::string comboStr;
+	TTF_Font* comboFont;
+	SDL_Color comboTextColor;
 	
 	Texture gameOverTexture;
 	std::string gameOverStr;

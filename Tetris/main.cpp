@@ -7,7 +7,7 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Track score + types of clears (single, tetris, tspin double, etc)
+- Add scoring for combos, B2B, mini T-spin?
 - Ready 3 2 1 go
 - Main menu
 - Sound effects + music

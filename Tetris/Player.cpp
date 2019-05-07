@@ -16,14 +16,13 @@ Player::Player(Playfield* p) {
 		addBlocksToQueue();
 	}
 
-	heldBlock = -1; //no block
+	heldBlock = NO_BLOCK;
 	holdUsed = false;
-
 	moveProgress = 0;
-
 	numLinesCleared = 0;
-
 	playfield->player = this;
+	tSpin = false;
+	combo = 0;
 }
 
 //Spawn player block at top of the screen as "next" piece
@@ -695,4 +694,14 @@ bool Player::tSpinThreeCornersOccupied() {
 	else {
 		return false;
 	}
+}
+
+//Adds one to the player's combo. Called by playfield upon line clear.
+void Player::incrementCombo() {
+	combo++;
+}
+
+//Resets the combo to 0. Called by playfield after land with no line clear
+void Player::resetCombo() {
+	combo = 0;
 }
