@@ -180,5 +180,5 @@ void UI::setCombo(int c) {
 //Renders the combo value
 void UI::renderCombo() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	comboTexture.render(playfield->x - 150, playfield->y + 260);
+	comboTexture.render(playfield->x - 150, playfield->y + 276);
 }

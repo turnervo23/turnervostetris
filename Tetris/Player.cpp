@@ -585,6 +585,12 @@ void Player::landBlock() {
 			&& prevAction == ROTATE
 			&& tSpinThreeCornersOccupied()) {
 			//T-spin mini
+			/*
+			T-spin mini notes - from http://kitaru.1101b.com/tc/mini.html:
+			"a t-spin is mini if there is an open corner on the point-end,
+			it clears one line or less, or reached its final(x, y) position by way of the t-spin triple wall kick"
+			I think the last one is the opposite - and is NOT a mini if used TST twist
+			*/
 			if (tSpinUnoccupiedByPoint()
 				&& tstTwist == false) {
 				tSpinMini = true;
