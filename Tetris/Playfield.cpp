@@ -315,8 +315,8 @@ void Playfield::checkLineClear() {
 	}
 
 	//Combo points
-	if (player->combo >= 2) {
-		player->addScore(50 * (player->combo - 1) * player->level);
+	if (player->combo >= 1) {
+		player->addScore(50 * (player->combo) * player->level);
 		ui->setCombo(player->combo);
 	}
 }

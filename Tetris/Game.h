@@ -8,8 +8,6 @@
 #include "Player.h"
 #include "UI.h"
 
-const int TEST = 1;
-
 class Game {
 public:
 	Game();

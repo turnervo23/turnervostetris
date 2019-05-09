@@ -22,7 +22,7 @@ Player::Player(Playfield* p) {
 	numLinesCleared = 0;
 	playfield->player = this;
 	tSpin = false;
-	combo = 0;
+	combo = -1;
 	tstTwist = false;
 }
 
@@ -731,9 +731,9 @@ void Player::incrementCombo() {
 	combo++;
 }
 
-//Resets the combo to 0. Called by playfield after land with no line clear
+//Resets the combo to -1. Called by playfield after land with no line clear
 void Player::resetCombo() {
-	combo = 0;
+	combo = -1;
 }
 
 //Checks if one of the spaces next to the T block's "point" are empty. 1st T-spin mini check

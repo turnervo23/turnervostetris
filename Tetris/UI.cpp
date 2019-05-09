@@ -45,7 +45,7 @@ void UI::render() {
 	if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 		renderClearType();
 	}
-	if (playfield->player->combo >= 2) {
+	if (playfield->player->combo >= 1) {
 		renderCombo();
 	}
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
