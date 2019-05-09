@@ -44,6 +44,8 @@ Playfield::Playfield(Game *g) {
 
 	player = NULL;
 	ui = NULL;
+
+	loadTextures();
 }
 
 //Loads the textures for the blocks

@@ -24,6 +24,9 @@ Player::Player(Playfield* p) {
 	tSpin = false;
 	combo = -1;
 	tstTwist = false;
+
+	//Temporary. Starts drop upon creation
+	startDrop();
 }
 
 //Spawn player block at top of the screen as "next" piece

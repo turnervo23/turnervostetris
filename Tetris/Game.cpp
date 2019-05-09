@@ -3,12 +3,9 @@
 //Constructor
 Game::Game() {
 	playfield1 = new Playfield(this);
-	playfield1->loadTextures();
-
 	player1 = new Player(playfield1);
-	player1->startDrop();
-
 	ui1 = new UI(playfield1);
+
 	startTime = SDL_GetTicks(); //frame counting starts here
 	ui1->setStartTime(startTime);
 
