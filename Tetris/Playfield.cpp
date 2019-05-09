@@ -2,7 +2,10 @@
 #include "UI.h"
 #include "Player.h"
 
-Playfield::Playfield() {
+Playfield::Playfield(Game *g) {
+	//Link with associated game
+	game = g;
+
 	//Empty playfield grid
 	for (int r = 0; r < FIELD_HEIGHT; r++) {
 		for (int c = 0; c < FIELD_WIDTH; c++) {
@@ -188,7 +191,7 @@ void Playfield::checkLineClear() {
 			lineClearing = true;
 			linesClearing[r] = true;
 			suspended = true;
-			lineClearStartFrame = gCurFrame;
+			lineClearStartFrame = game->getCurFrame();
 			player->incrementNumLinesCleared();
 		}
 	}
@@ -320,7 +323,7 @@ void Playfield::checkLineClear() {
 
 //Line clear animation. Flashes on and off. Suspends gameplay for LINE_CLEAR_DELAY frames
 void Playfield::renderLineClear() {
-	lineClearCurFrame = gCurFrame;
+	lineClearCurFrame = game->getCurFrame();
 
 	if (lineClearCurFrame - lineClearStartFrame >= LINE_CLEAR_DELAY) { //animation done
 		for (int r = 0; r < FIELD_HEIGHT; r++) { //top down. ensures cleared lines aren't moved
@@ -359,7 +362,7 @@ void Playfield::endGame() {
 
 //Render the lock flash texture at the block locations of the recently landed piece
 void Playfield::renderLockFlash() {
-	lockFlashCurFrame = gCurFrame;
+	lockFlashCurFrame = game->getCurFrame();
 
 	if (lockFlashCurFrame - lockFlashStartFrame >= LOCK_FLASH_TIME) { //animation done
 		lockFlashing = false;

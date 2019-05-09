@@ -12,6 +12,7 @@ What's next on the agenda?
 - Sound effects + music
 - Customizable controls
 - Turn off automatic key repeating
+- High scores
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
 
@@ -29,6 +30,7 @@ Known bugs:
 #include <iostream>
 #include <string>
 #include <cmath>
+#include "Game.h"
 #include "Texture.h"
 #include "Playfield.h"
 #include "Player.h"
@@ -117,6 +119,7 @@ int main(int argc, char* args[])
 	if (!init())
 		exit(1);
 
+	/*
 	Playfield playfield1;
 	playfield1.loadTextures();
 
@@ -130,7 +133,7 @@ int main(int argc, char* args[])
 	//Main loop
 	bool quit = false;
 	SDL_Event e;
-	const Uint8* keystate = SDL_GetKeyboardState(NULL);
+	//const Uint8* keystate = SDL_GetKeyboardState(NULL);
 	gCurFrame = -1;
 	gPrevFrame = -1;
 	while (!quit) {
@@ -218,6 +221,12 @@ int main(int argc, char* args[])
 		SDL_RenderPresent(gRenderer);
 
 		gPrevFrame = gCurFrame; //update frame count
+	}
+	*/
+
+	Game game;
+	while (!game.quitting()) {
+		game.update();
 	}
 
 	//End of program

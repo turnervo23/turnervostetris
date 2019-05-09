@@ -10,14 +10,16 @@
 #include <string>
 #include <iostream>
 #include "Texture.h"
+#include "Game.h"
+#include "Player.h"
+#include "UI.h"
 
+class Game;
 class Player;
 class UI;
 
-extern int gCurFrame;
-
-const int NUM_PLAYER_BLOCKS = 4;
-const int NUM_BLOCK_TYPES = 7;
+//const int NUM_PLAYER_BLOCKS = 4;
+//const int NUM_BLOCK_TYPES = 7;
 const int FIELD_WIDTH = 10;
 const int FIELD_HEIGHT = 40;
 const int VISIBLE_FIELD_HEIGHT = 20;
@@ -40,7 +42,7 @@ class Playfield {
 	friend class Player;
 	friend class UI;
 public:
-	Playfield();
+	Playfield(Game*);
 	void loadTextures();
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
@@ -51,7 +53,8 @@ private:
 	void checkLineClear();
 	void renderLineClear();
 	void renderLockFlash();
-
+	
+	Game *game;
 	Player *player;
 	UI *ui;
 

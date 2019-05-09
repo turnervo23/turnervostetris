@@ -10,14 +10,15 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
-#include "Playfield.h"
 
-//const int NUM_PLAYER_BLOCKS = 4;
+const int NUM_PLAYER_BLOCKS = 4;
+const int NUM_BLOCK_TYPES = 7;
 const int NUM_DIMENSIONS = 2;
 const int NUM_NEXT_PIECES = 6;
 const double SOFT_DROP_G = 0.5; //moves down this amount per frame
 const int LOCK_SPEED = 40; //in frames
 const int MAX_GROUND_ACTIONS = 15;
+
 
 //Used to track last action (for T-spin checking)
 enum Actions {
@@ -73,7 +74,7 @@ private:
 	void renderHeldBlock();
 	void renderGhostBlock();
 
-	Playfield* playfield; //specifies which playfield the player is on, in case there are multiple players
+	Playfield *playfield; //specifies which playfield the player is on, in case there are multiple players
 	//These coordinates are relative to the VISIBLE playing field. Too lazy to rework it at this point
 	int x, y; // Grid coordinates for center of rotation, except I and O, which in default orientation have the "center" to the left and down
 	int type; // type of block. i/j/l/o/s/t/z correspond to 0-6

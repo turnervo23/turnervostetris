@@ -574,7 +574,7 @@ void Player::landBlock() {
 	if (blocksAboveVisibleField < NUM_PLAYER_BLOCKS) {
 		//start lock flash animation
 		playfield->lockFlashing = true;
-		playfield->lockFlashStartFrame = gCurFrame;
+		playfield->lockFlashStartFrame = playfield->game->getCurFrame();
 		for (int i = 0; i < NUM_PLAYER_BLOCKS; i++) {
 			playfield->lockFlashX[i] = x + blockCoords[i][0];
 			playfield->lockFlashY[i] = y + blockCoords[i][1];
