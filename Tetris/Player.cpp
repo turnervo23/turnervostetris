@@ -162,6 +162,7 @@ void Player::spawnBlock() {
 	x = 4; y = -1;
 	setOrientation(0);
 	gravityProgress = 0.0;
+	lockProgress = 0;
 	groundActions = 0;
 
 	if (isColliding()) { //game over if spawns in another block's place ("block out")
@@ -632,7 +633,7 @@ void Player::_debug_clearPlayfield() {
 //Switches current block with held block and restarts the drop.
 //Only usable if it hasn't been used since the last piece landed.
 void Player::holdBlock() {
-	if (!holdUsed) {
+	if (!holdUsed && !playfield->suspended) {
 		int temp = heldBlock;
 		heldBlock = type;
 

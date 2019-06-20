@@ -18,9 +18,8 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 
 Known bugs:
 - Line clear flash has inconsistent speed. Tied to framerate issues?
-- Piece sometimes locks really quickly after landing. Same as Tetris 99, wtf! I have no idea what the cause is.
-- For now, there is no distinction between a T-spin and a T-spin mini. Both are counted as regular T-spins.
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
+- Hold piece should gray out if hold already used
 */
 
 #include <SDL.h>
@@ -40,13 +39,17 @@ Known bugs:
 const int SCREEN_WIDTH = 672; //320 playfield, 16 border, 168 next blocks, 168 hold blocks?
 const int SCREEN_HEIGHT = 720;
 
-//Frame counters
-int gCurFrame;
-int gPrevFrame;
-
 //Window and screen surface
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
+
+//Game state
+int gGameState;
+
+enum GameStates {
+	MENU,
+	GAME
+};
 
 //Aliases for passing to playerMove function
 enum KeyPresses {
@@ -119,9 +122,15 @@ int main(int argc, char* args[])
 	if (!init())
 		exit(1);
 
+	//Initialize game
 	Game game;
+	gGameState = GAME;
+
+	//Main loop
 	while (!game.quitting()) {
-		game.update();
+		if (gGameState == GAME) {
+			game.update();
+		}
 	}
 
 	//End of program
