@@ -7,7 +7,6 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Ready 3 2 1 go
 - Main menu
 - Sound effects + music
 - Customizable controls
@@ -17,10 +16,6 @@ What's next on the agenda?
 https://tetris.fandom.com/wiki/Tetris_Guideline
 
 Known bugs:
-- Currently trying to resolve circular includes and constant redefinitions
-  - What should work: in header, forward declare all classes referenced in header
-  in source, include all headers of classes referenced in source
-  declare constants in separate "Constants.h" file so they aren't redeclared
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
 */
@@ -38,6 +33,7 @@ Known bugs:
 #include "Player.h"
 #include "UI.h"
 #include "Constants.h"
+#include "Menu.h"
 
 //Window and screen surface
 SDL_Window* gWindow = NULL;
@@ -123,12 +119,16 @@ int main(int argc, char* args[])
 		exit(1);
 
 	//Initialize game
+	Menu menu;
 	Game game;
-	gGameState = GAME;
+	gGameState = MENU;
 
 	//Main loop
-	while (!game.quitting()) {
-		if (gGameState == GAME) {
+	while (!menu.quitting() && !game.quitting()) {
+		if (gGameState == MENU) {
+			menu.update();
+		}
+		else if (gGameState == GAME) {
 			game.update();
 		}
 	}

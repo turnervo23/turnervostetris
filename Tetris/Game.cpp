@@ -31,7 +31,7 @@ void Game::update() {
 	curFrame = int(floor((SDL_GetTicks() - startTime) * 60 / 1000.0));
 
 	for (int i = prevFrame; i < curFrame; i++) { //process new frames
-			//Handle events on queue
+		//Handle events on queue
 		while (SDL_PollEvent(&event) != 0) {
 			//Quit program
 			if (event.type == SDL_QUIT)
@@ -61,7 +61,7 @@ void Game::update() {
 				case SDLK_LSHIFT:
 					player1->holdBlock();
 					break;
-					//debug only, remove in finished version
+				//debug only, remove in finished version
 				case SDLK_c:
 					player1->_debug_cyclePiece();
 					break;

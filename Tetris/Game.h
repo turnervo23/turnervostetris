@@ -1,4 +1,4 @@
-//Class for the main game loop. Also stores constants for Playfield, Player, and UI.
+//Class for the main game loop.
 #pragma once
 #ifndef GAME_H
 #define GAME_H

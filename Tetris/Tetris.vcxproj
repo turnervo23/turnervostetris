@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Playfield.cpp" />
     <ClCompile Include="main.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Playfield.h" />
     <ClInclude Include="Player.h" />
