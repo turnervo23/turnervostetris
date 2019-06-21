@@ -60,47 +60,7 @@ void Playfield::loadTextures() {
 		path = "./img/block.png";
 		textures[i].loadFromFile(path);
 
-		//Colors each block texture separately
-		int r, g, b;
-		switch (i) {
-		case I_BLOCK:
-			r = 0;
-			g = 255;
-			b = 255;
-			break;
-		case J_BLOCK:
-			r = 0;
-			g = 0;
-			b = 255;
-			break;
-		case L_BLOCK:
-			r = 255;
-			g = 127;
-			b = 0;
-			break;
-		case O_BLOCK:
-			r = 255;
-			g = 255;
-			b = 0;
-			break;
-		case S_BLOCK:
-			r = 0;
-			g = 255;
-			b = 0;
-			break;
-		case T_BLOCK:
-			r = 255;
-			g = 0;
-			b = 255;
-			break;
-		case Z_BLOCK:
-			r = 255;
-			g = 0;
-			b = 0;
-			break;
-		}
-
-		textures[i].setColor(r, g, b);
+		setTextureColorByBlockType(textures[i], i);
 	}
 
 	//Line clear flash texture
@@ -378,4 +338,49 @@ void Playfield::renderLockFlash() {
 			lockFlashTexture.render(x + 32*lockFlashX[i], y + 32*lockFlashY[i]);
 		}
 	}
+}
+
+//Used by Player to recolor texture after grayed out to indicate used hold block
+void Playfield::setTextureColorByBlockType(Texture &texture, int blockType) {
+	//Colors each block texture separately
+	int r, g, b;
+	switch (blockType) {
+	case I_BLOCK:
+		r = 0;
+		g = 255;
+		b = 255;
+		break;
+	case J_BLOCK:
+		r = 0;
+		g = 0;
+		b = 255;
+		break;
+	case L_BLOCK:
+		r = 255;
+		g = 127;
+		b = 0;
+		break;
+	case O_BLOCK:
+		r = 255;
+		g = 255;
+		b = 0;
+		break;
+	case S_BLOCK:
+		r = 0;
+		g = 255;
+		b = 0;
+		break;
+	case T_BLOCK:
+		r = 255;
+		g = 0;
+		b = 255;
+		break;
+	case Z_BLOCK:
+		r = 255;
+		g = 0;
+		b = 0;
+		break;
+	}
+
+	texture.setColor(r, g, b);
 }

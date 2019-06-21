@@ -23,7 +23,6 @@ Known bugs:
   declare constants in separate "Constants.h" file so they aren't redeclared
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
-- Hold piece should gray out if hold already used
 */
 
 #include <SDL.h>

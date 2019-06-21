@@ -526,6 +526,11 @@ void Player::renderHeldBlock() {
 	int savedOri = orientation;
 
 	SDL_RenderSetClipRect(gRenderer, &playfield->heldBlockClip);
+	
+	//Gray out if hold used already
+	if (holdUsed) {
+		playfield->textures[heldBlock].setColor(127, 127, 127);
+	}
 	orientation = 0;
 	//Rendered 3/4 size
 	type = heldBlock;
@@ -537,6 +542,7 @@ void Player::renderHeldBlock() {
 	}
 
 	//Returning player vars to orig values
+	playfield->setTextureColorByBlockType(playfield->textures[heldBlock], heldBlock);
 	type = savedType;
 	orientation = savedOri;
 	setOrientation(orientation);

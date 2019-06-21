@@ -23,6 +23,7 @@ class Playfield {
 public:
 	Playfield(Game*);
 	void loadTextures();
+	void setTextureColorByBlockType(Texture &t, int blockType);
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
 	void endGame(); //only public for debug
