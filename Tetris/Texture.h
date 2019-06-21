@@ -1,14 +1,13 @@
 //Texture.h - texture wrapper class
-
 #pragma once
+#ifndef TEXTURE_H
+#define TEXTURE_H
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <string>
 #include <iostream>
-
-extern SDL_Renderer* gRenderer;
-const int DEFAULT = -1; //used to detect optional parameters
 
 class Texture {
 	friend class Playfield;
@@ -27,3 +26,5 @@ private:
 	SDL_Texture* texture; //actual texture
 	int width, height;
 };
+
+#endif

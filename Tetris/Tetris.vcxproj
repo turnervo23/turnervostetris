@@ -140,6 +140,7 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Playfield.h" />

@@ -1,6 +1,9 @@
 #include "Playfield.h"
-#include "UI.h"
 #include "Player.h"
+#include "UI.h"
+#include "Game.h"
+
+extern SDL_Renderer* gRenderer;
 
 Playfield::Playfield(Game *g) {
 	//Link with associated game

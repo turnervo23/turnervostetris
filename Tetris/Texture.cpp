@@ -1,5 +1,7 @@
 #include "Texture.h"
 
+extern SDL_Renderer* gRenderer;
+
 Texture::Texture() {
 	texture = NULL;
 	width = 0;

@@ -2,6 +2,8 @@
 #include "Playfield.h"
 #include "Player.h"
 
+extern SDL_Renderer* gRenderer;
+
 UI::UI(Playfield* p) {
 	playfield = p;
 	playfield->ui = this;

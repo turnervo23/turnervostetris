@@ -1,4 +1,9 @@
 #include "Game.h"
+#include "Playfield.h"
+#include "Player.h"
+#include "UI.h"
+
+extern SDL_Renderer* gRenderer;
 
 //Constructor
 Game::Game() {

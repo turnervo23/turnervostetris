@@ -9,34 +9,13 @@
 #include <SDL_image.h>
 #include <string>
 #include <iostream>
+#include "Constants.h"
 #include "Texture.h"
-#include "Game.h"
-#include "Player.h"
-#include "UI.h"
 
 class Game;
 class Player;
 class UI;
-
-//const int NUM_PLAYER_BLOCKS = 4;
-//const int NUM_BLOCK_TYPES = 7;
-const int FIELD_WIDTH = 10;
-const int FIELD_HEIGHT = 40;
-const int VISIBLE_FIELD_HEIGHT = 20;
-const int LINE_CLEAR_DELAY = 30; //in frames
-const int LINE_CLEAR_FLASH_FREQ = 4;
-const int LOCK_FLASH_TIME = 10; //in frames
-
-const int NO_BLOCK = -1;
-enum BlockTypes {
-	I_BLOCK,
-	J_BLOCK,
-	L_BLOCK,
-	O_BLOCK,
-	S_BLOCK,
-	T_BLOCK,
-	Z_BLOCK,
-};
+class Texture;
 
 class Playfield {
 	friend class Player;

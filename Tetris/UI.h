@@ -5,10 +5,12 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
+#include "Constants.h"
 #include "Texture.h"
 
-const int GAME_OVER_TEXT_DELAY = 60;
-const int CLEAR_TYPE_DISPLAY_TIME = 120;
+class Playfield;
+class Player;
+class Texture;
 
 class UI {
 	friend class Playfield;

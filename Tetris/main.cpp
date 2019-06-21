@@ -17,6 +17,10 @@ What's next on the agenda?
 https://tetris.fandom.com/wiki/Tetris_Guideline
 
 Known bugs:
+- Currently trying to resolve circular includes and constant redefinitions
+  - What should work: in header, forward declare all classes referenced in header
+  in source, include all headers of classes referenced in source
+  declare constants in separate "Constants.h" file so they aren't redeclared
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
 - Hold piece should gray out if hold already used
@@ -34,10 +38,7 @@ Known bugs:
 #include "Playfield.h"
 #include "Player.h"
 #include "UI.h"
-
-//Screen dimension constants
-const int SCREEN_WIDTH = 672; //320 playfield, 16 border, 168 next blocks, 168 hold blocks?
-const int SCREEN_HEIGHT = 720;
+#include "Constants.h"
 
 //Window and screen surface
 SDL_Window* gWindow = NULL;

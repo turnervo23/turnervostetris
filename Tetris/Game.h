@@ -4,9 +4,10 @@
 #define GAME_H
 
 #include <SDL.h>
-#include "Playfield.h"
-#include "Player.h"
-#include "UI.h"
+
+class Playfield;
+class Player;
+class UI;
 
 class Game {
 public:

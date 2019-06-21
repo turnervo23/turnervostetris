@@ -1,6 +1,10 @@
 #include "Player.h"
 #include "Playfield.h"
 #include "UI.h"
+#include "Game.h"
+#include "Texture.h"
+
+extern SDL_Renderer* gRenderer;
 
 //Constructor - sets all initial values for player
 Player::Player(Playfield* p) {
