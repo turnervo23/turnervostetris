@@ -35,7 +35,8 @@ Playfield::Playfield(Game *g) {
 	heldBlockClip.w = 160;
 	heldBlockClip.h = 72;
 
-	suspended = false;
+	suspended = true;
+	countdown = true;
 	gameOver = false;
 
 	lineClearing = false;
@@ -317,6 +318,13 @@ void Playfield::renderLineClear() {
 			}
 		}	
 	}
+}
+
+//Called after beginning-of-game countdown finishes
+void Playfield::startGame() {
+	suspended = false;
+	countdown = false;
+	ui->setStartTime(SDL_GetTicks());
 }
 
 //Ends the game, suspending gameplay indefinitely (later: until menu selection by player)

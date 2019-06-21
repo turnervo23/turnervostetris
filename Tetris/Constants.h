@@ -22,6 +22,7 @@ const int LOCK_SPEED = 40; //in frames
 const int MAX_GROUND_ACTIONS = 15;
 const int GAME_OVER_TEXT_DELAY = 60;
 const int CLEAR_TYPE_DISPLAY_TIME = 120;
+const int COUNTDOWN_FRAMES_PER_STAGE = 60;
 
 const int NO_BLOCK = -1;
 enum BlockTypes {

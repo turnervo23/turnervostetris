@@ -37,6 +37,19 @@ UI::UI(Playfield* p) {
 	gameOverTextColor = { 0, 0, 0, 0 };
 	gameOverTexture.loadFromText(gameOverStr, gameOverFont, gameOverTextColor);
 	gameOverTimer = 0;
+
+	countdownStrs[0] = "READY";
+	countdownStrs[1] = "3";
+	countdownStrs[2] = "2";
+	countdownStrs[3] = "1";
+	countdownStrs[4] = "GO";
+	countdownFont = TTF_OpenFont("./font/consolab.ttf", 32);
+	countdownTextColor = { 0, 0, 0, 0 };
+	for (int i = 0; i < 5; i++) {
+		countdownTextures[i].loadFromText(countdownStrs[i], countdownFont, countdownTextColor);
+	}
+	countdownStage = 0;
+	countdownTimer = 0;
 }
 
 void UI::render() {
@@ -52,6 +65,9 @@ void UI::render() {
 	}
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
 		renderGameOver();
+	}
+	if (countdownStage <= 4) {
+		renderCountdown();
 	}
 }
 
@@ -96,7 +112,26 @@ void UI::renderTime() {
 
 //Update function, called once per frame
 void UI::update() {
-	if (playfield->gameOver == false) {
+	if (playfield->countdown) {
+		if (countdownTimer < COUNTDOWN_FRAMES_PER_STAGE) { //increment timer
+			countdownTimer += 1;
+		}
+		else { //stage finished, advance to next
+			countdownStage++;
+			countdownTimer = 0;
+		}
+
+		if (countdownStage > 4) { //countdown finished, start gameplay
+			playfield->startGame();
+		}
+	}
+	else if (playfield->gameOver) {
+		//game over timer
+		if (gameOverTimer < GAME_OVER_TEXT_DELAY) {
+			gameOverTimer += 1;
+		}
+	}
+	else {
 		setTime(SDL_GetTicks() - startTime); //update time unless game is over
 		setScore(playfield->player->score);
 		setLevel(playfield->player->level);
@@ -105,12 +140,6 @@ void UI::update() {
 		//clear type timer
 		if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 			clearTypeTimer += 1;
-		}
-	}
-	else {
-		//game over timer
-		if (gameOverTimer < GAME_OVER_TEXT_DELAY) {
-			gameOverTimer += 1;
 		}
 	}
 }
@@ -122,6 +151,15 @@ void UI::renderGameOver() {
 	TTF_SizeText(gameOverFont, gameOverStr.c_str(), &w, &h); //get dimensions of game over texture
 
 	gameOverTexture.render(playfield->x + 160 - w/2, playfield->y + 100);
+}
+
+//Renders the starting countdown text. stages 0-4: READY, 3, 2, 1, GO
+void UI::renderCountdown() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	int w, h;
+	TTF_SizeText(countdownFont, countdownStrs[countdownStage].c_str(), &w, &h); //get dimensions of countdown texture
+
+	countdownTextures[countdownStage].render(playfield->x + 160 - w/2, playfield->y + 100);
 }
 
 //Sets the score. Obtained from this->playfield->player

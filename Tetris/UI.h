@@ -34,6 +34,7 @@ private:
 	void renderClearType();
 	void renderCombo();
 	void renderGameOver();
+	void renderCountdown();
 
 	Playfield* playfield;
 
@@ -75,6 +76,13 @@ private:
 	TTF_Font* gameOverFont;
 	SDL_Color gameOverTextColor;
 	int gameOverTimer; //displays text after GAME_OVER_TEXT_DELAY
+
+	Texture countdownTextures[5];
+	std::string countdownStrs[5];
+	TTF_Font* countdownFont;
+	SDL_Color countdownTextColor;
+	int countdownStage;
+	int countdownTimer; //displays text after COUNTDOWN_FRAMES_PER_STAGE
 };
 
 #endif

@@ -26,6 +26,7 @@ public:
 	void setTextureColorByBlockType(Texture &t, int blockType);
 	void update(); //called once per frame (60 fps)
 	void render(); //called once per frame processing loop
+	void startGame();
 	void endGame(); //only public for debug
 private:
 	void renderPlayfield();
@@ -60,7 +61,9 @@ private:
 	int lockFlashStartFrame;
 	int lockFlashCurFrame;
 
+	//suspended game states
 	bool gameOver;
+	bool countdown;
 
 	SDL_Rect playfieldClip; //clipRect for playfield
 	SDL_Rect nextBlockClip; //clipRect for next piece display
