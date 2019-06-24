@@ -248,8 +248,11 @@ void Player::renderPlayer() {
 
 //Update player status. Called once per frame
 void Player::update() {
-	if (playfield->suspended == false) {
-		processMovement();
+	//This is outside of the suspended check so autorepeat can be buffered while suspended.
+	//There is another suspended check in the function for actual movement
+	processMovement();
+
+	if (!playfield->suspended) {
 		applyGravity();
 		applyLock();
 	}
@@ -690,11 +693,13 @@ void Player::processMovement() {
 		moveProgress += 1;
 	}
 
-	if (moveProgress == 1 || (moveProgress >= 10 && moveProgress % 2 == 0)) {
-		if (holdingLeft == true)
-			moveLeft();
-		else if (holdingRight == true) {
-			moveRight();
+	if (!playfield->suspended) {
+		if (moveProgress == 1 || (moveProgress >= 10 && moveProgress % 2 == 0)) {
+			if (holdingLeft == true)
+				moveLeft();
+			else if (holdingRight == true) {
+				moveRight();
+			}
 		}
 	}
 }

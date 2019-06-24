@@ -16,7 +16,6 @@ What's next on the agenda?
 https://tetris.fandom.com/wiki/Tetris_Guideline
 
 Known bugs:
-- Can't buffer autorepeat while game is suspended
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
 */
