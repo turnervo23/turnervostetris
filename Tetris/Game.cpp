@@ -11,8 +11,7 @@ Game::Game() {
 	player1 = new Player(playfield1);
 	ui1 = new UI(playfield1);
 
-	startTime = SDL_GetTicks(); //frame counting starts here
-	ui1->setStartTime(startTime);
+	startTime = -1; //don't set true start time until game starts updating
 
 	quit = false;
 	curFrame = -1;
@@ -28,6 +27,11 @@ Game::~Game() {
 
 //Update function, called once per frame
 void Game::update() {
+	if (startTime == -1) { //frame counting starts here
+		startTime = SDL_GetTicks();
+		ui1->setStartTime(startTime);
+	}
+
 	curFrame = int(floor((SDL_GetTicks() - startTime) * 60 / 1000.0));
 
 	for (int i = prevFrame; i < curFrame; i++) { //process new frames

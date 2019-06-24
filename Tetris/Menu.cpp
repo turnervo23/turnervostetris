@@ -1,6 +1,7 @@
 #include "Menu.h"
 
 extern SDL_Renderer* gRenderer;
+extern int gGameState;
 
 Menu::Menu() {
 	menuOptionStrs[0] = "Play";
@@ -18,34 +19,40 @@ Menu::Menu() {
 
 	cursorTexture.loadFromFile("./img/menuCursor.png");
 
+	activeMenu = MAIN;
 	highlightedOption = PLAY;
 	quit = false;
 }
 
 void Menu::update() {
-	while (SDL_PollEvent(&event) != 0) {
-		//Quit program
-		if (event.type == SDL_QUIT)
-			quit = true;
+	if (activeMenu == MAIN) {
+		while (SDL_PollEvent(&event) != 0) {
+			//Quit program
+			if (event.type == SDL_QUIT)
+				quit = true;
 
-		//Pressed keys
-		else if (event.type == SDL_KEYDOWN) {
-			switch (event.key.keysym.sym) {
-			case SDLK_UP:
-				highlightedOption--;
-				if (highlightedOption < 0) { //if at top, go to bottom
-					highlightedOption = NUM_MENU_OPTIONS - 1;
+			//Pressed keys
+			else if (event.type == SDL_KEYDOWN) {
+				switch (event.key.keysym.sym) {
+				case SDLK_UP:
+					highlightedOption--;
+					if (highlightedOption < 0) { //if at top, go to bottom
+						highlightedOption = NUM_MENU_OPTIONS - 1;
+					}
+					break;
+				case SDLK_DOWN:
+					highlightedOption++;
+					if (highlightedOption > NUM_MENU_OPTIONS - 1) { //if at bottom, go to top
+						highlightedOption = 0;
+					}
+					break;
+				case SDLK_RETURN:
+					selectOption();
+					break;
 				}
-				break;
-			case SDLK_DOWN:
-				highlightedOption++;
-				if (highlightedOption > NUM_MENU_OPTIONS - 1) { //if at bottom, go to top
-					highlightedOption = 0;
-				}
-				break;
 			}
 		}
-	}
+	}	
 
 	//Clear screen
 	SDL_RenderClear(gRenderer);
@@ -59,8 +66,8 @@ void Menu::update() {
 }
 
 void Menu::render() {
-	renderMenuOptions();
 	renderTitle();
+	renderMenuOptions();
 	renderCursor();
 }
 
@@ -84,4 +91,15 @@ void Menu::renderCursor() {
 //Returns true if user has quit the game
 bool Menu::quitting() {
 	return quit;
+}
+
+void Menu::selectOption() {
+	switch (highlightedOption) {
+	case PLAY:
+		gGameState = GAME;
+		break;
+	case QUIT:
+		quit = true;
+		break;
+	}
 }

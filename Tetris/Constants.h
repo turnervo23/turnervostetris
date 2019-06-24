@@ -7,6 +7,11 @@
 const int SCREEN_WIDTH = 672; //320 playfield, 16 border, 168 next blocks, 168 hold blocks?
 const int SCREEN_HEIGHT = 720;
 
+enum GameStates {
+	MENU,
+	GAME
+};
+
 const int FIELD_WIDTH = 10;
 const int FIELD_HEIGHT = 40;
 const int VISIBLE_FIELD_HEIGHT = 20;
