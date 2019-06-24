@@ -7,7 +7,7 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 What's next on the agenda?
-- Main menu
+- Pause menu in game that allows you to return to main menu
 - Sound effects + music
 - Customizable controls
 - Turn off automatic key repeating

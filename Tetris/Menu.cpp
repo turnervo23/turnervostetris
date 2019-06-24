@@ -19,6 +19,11 @@ Menu::Menu() {
 
 	cursorTexture.loadFromFile("./img/menuCursor.png");
 
+	menuControlsStr = "Navigate: Up/Down | Select: Enter";
+	menuControlsFont = TTF_OpenFont("./font/consola.ttf", 16);
+	menuControlsTextColor = { 0, 0, 0, 0 };
+	menuControlsTexture.loadFromText(menuControlsStr, menuControlsFont, menuControlsTextColor);
+
 	activeMenu = MAIN;
 	highlightedOption = PLAY;
 	quit = false;
@@ -69,6 +74,7 @@ void Menu::render() {
 	renderTitle();
 	renderMenuOptions();
 	renderCursor();
+	renderMenuControls();
 }
 
 void Menu::renderMenuOptions() {
@@ -86,6 +92,13 @@ void Menu::renderTitle() {
 void Menu::renderCursor() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	cursorTexture.render(60, 200 + 50*highlightedOption); //renders to the left of highlighted menu option
+}
+
+void Menu::renderMenuControls() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	int w, h;
+	TTF_SizeText(menuControlsFont, menuControlsStr.c_str(), &w, &h); //get size of texture
+	menuControlsTexture.render((SCREEN_WIDTH/2) - (w/2), SCREEN_HEIGHT - h - 16);
 }
 
 //Returns true if user has quit the game

@@ -30,6 +30,7 @@ private:
 	void renderMenuOptions();
 	void renderTitle();
 	void renderCursor();
+	void renderMenuControls();
 	void selectOption();
 
 	Texture menuOptionTextures[2];
@@ -43,6 +44,11 @@ private:
 	SDL_Color titleTextColor;
 
 	Texture cursorTexture;
+
+	Texture menuControlsTexture;
+	std::string menuControlsStr;
+	TTF_Font* menuControlsFont;
+	SDL_Color menuControlsTextColor;
 
 	int highlightedOption;
 	SDL_Event event; //player input
