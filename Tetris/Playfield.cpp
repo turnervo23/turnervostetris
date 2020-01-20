@@ -144,11 +144,16 @@ void Playfield::update() {
 void Playfield::checkLineClear() {
 	bool line;
 	int numLinesClearedAtOnce = 0; //tracks the number of lines cleared at once for scoring
+	int numSquaresFilled = 0; //tracks number of filled squares on the grid. used for all clear check
+	
 	for (int r = 0; r < FIELD_HEIGHT; r++) { //for each row, check if line
 		line = true;
 		for (int c = 0; c < FIELD_WIDTH; c++) { //if any in row NO_BLOCK, no line
 			if (grid[r][c] == NO_BLOCK) {
 				line = false;
+			}
+			else {
+				numSquaresFilled++;
 			}
 		}
 
@@ -160,6 +165,12 @@ void Playfield::checkLineClear() {
 			lineClearStartFrame = game->getCurFrame();
 			player->incrementNumLinesCleared();
 		}
+	}
+
+	//All clear check
+	if (numSquaresFilled == numLinesClearedAtOnce * FIELD_WIDTH) {
+		//no score?
+		ui->setAllClear();
 	}
 
 	//Tally player score for lines cleared
@@ -187,7 +198,7 @@ void Playfield::checkLineClear() {
 		}
 		//Nothing
 		else {
-			backToBack = false;
+			//backToBack = false; //This was a bug, I believe
 		}
 
 		player->resetCombo();

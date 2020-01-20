@@ -24,6 +24,7 @@ public:
 	void setLines(int l);
 	void setClearType(std::string ct);
 	void setCombo(int c);
+	void setAllClear();
 	void update();
 	void render();
 private:
@@ -35,6 +36,7 @@ private:
 	void renderCombo();
 	void renderGameOver();
 	void renderCountdown();
+	void renderAllClear();
 
 	Playfield* playfield;
 
@@ -83,6 +85,12 @@ private:
 	SDL_Color countdownTextColor;
 	int countdownStage;
 	int countdownTimer; //displays text after COUNTDOWN_FRAMES_PER_STAGE
+
+	Texture allClearTexture;
+	std::string allClearStr;
+	TTF_Font* allClearFont;
+	SDL_Color allClearTextColor;
+	int allClearTimer;
 };
 
 #endif

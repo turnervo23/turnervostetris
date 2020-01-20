@@ -50,6 +50,12 @@ UI::UI(Playfield* p) {
 	}
 	countdownStage = 0;
 	countdownTimer = 0;
+
+	allClearStr = "All Clear!";
+	allClearFont = TTF_OpenFont("./font/consolab.ttf", 32);
+	allClearTextColor = { 0, 0, 0, 0 };
+	allClearTexture.loadFromText(allClearStr, allClearFont, allClearTextColor);
+	allClearTimer = ALL_CLEAR_DISPLAY_TIME;
 }
 
 void UI::render() {
@@ -68,6 +74,9 @@ void UI::render() {
 	}
 	if (countdownStage <= 4) {
 		renderCountdown();
+	}
+	if (allClearTimer < ALL_CLEAR_DISPLAY_TIME) {
+		renderAllClear();
 	}
 }
 
@@ -140,6 +149,11 @@ void UI::update() {
 		//clear type timer
 		if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 			clearTypeTimer += 1;
+		}
+
+		//all clear timer
+		if (allClearTimer < ALL_CLEAR_DISPLAY_TIME) {
+			allClearTimer += 1;
 		}
 	}
 }
@@ -221,4 +235,18 @@ void UI::setCombo(int c) {
 void UI::renderCombo() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	comboTexture.render(playfield->x - 150, playfield->y + 276);
+}
+
+//Sets the "All Clear" status
+void UI::setAllClear() {
+	allClearTimer = 0;
+}
+
+//Renders the "All Clear" message
+void UI::renderAllClear() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	int w, h;
+	TTF_SizeText(allClearFont, allClearStr.c_str(), &w, &h); //get dimensions of countdown texture
+
+	allClearTexture.render(playfield->x + 160 - w / 2, playfield->y + 100);
 }

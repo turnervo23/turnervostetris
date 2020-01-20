@@ -6,7 +6,20 @@ The first finished version should have at least:
 - Endless mode (aka Marathon) with dynamic speed levels and scoring.
 Then I can start adding more stuff if I want.
 
-What's next on the agenda?
+New goal: publish a finished version within the next 3 weeks. Stop feature creep
+What's left?
+- Redo "ready 3 2 1 go" to just "ready go". Current way wastes a bunch of time
+- Redo menu - don't make it separate from the "game". Not planning on adding more complexity
+- Restart/return to menu on game over
+- Redo colors - make it more of a "dark theme"
+- Pause menu with resume/restart/return to menu
+- Turn off automatic key repeating (rotate, hard drop, etc)
+- Refine debug options - click to create block, pause block drop, respawn block
+- A README for GitHub
+
+[OLD] What's next on the agenda?
+- All/perfect clear recognition
+- Change autorepeat delay to a constant
 - Pause menu in game that allows you to return to main menu
 - Sound effects + music
 - Customizable controls
@@ -18,6 +31,7 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 Known bugs:
 - Line clear flash has inconsistent speed. Tied to framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
+- The next piece appears at the top before end of line clear/start of game
 */
 
 #include <SDL.h>
