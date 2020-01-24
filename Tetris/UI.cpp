@@ -9,39 +9,39 @@ UI::UI(Playfield* p) {
 	playfield->ui = this;
 
 	timeFont = TTF_OpenFont("./font/consola.ttf", 16);
-	timeTextColor = { 0, 0, 0, 0 };
+	timeTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	setTime(0);
 
 	scoreFont = TTF_OpenFont("./font/consola.ttf", 16);
-	scoreTextColor = { 0, 0, 0, 0 };
+	scoreTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	setScore(0);
 
 	levelFont = TTF_OpenFont("./font/consola.ttf", 16);
-	levelTextColor = { 0, 0, 0, 0 };
+	levelTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	setLevel(0);
 
 	linesFont = TTF_OpenFont("./font/consola.ttf", 16);
-	linesTextColor = { 0, 0, 0, 0 };
+	linesTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	setLines(0);
 
 	clearTypeFont = TTF_OpenFont("./font/consola.ttf", 16);
-	clearTypeColor = { 0, 0, 0, 0 };
+	clearTypeColor = { 0xd0, 0xd0, 0x00, 0xFF };
 	clearTypeTimer = CLEAR_TYPE_DISPLAY_TIME;
 
 	comboFont = TTF_OpenFont("./font/consola.ttf", 16);
-	comboTextColor = { 0, 0, 0, 0 };
+	comboTextColor = { 0x00, 0xb0, 0xFF, 0xFF };
 	setCombo(0);
 
 	gameOverStr = "GAME OVER";
 	gameOverFont = TTF_OpenFont("./font/consolab.ttf", 32);
-	gameOverTextColor = { 0, 0, 0, 0 };
+	gameOverTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	gameOverTexture.loadFromText(gameOverStr, gameOverFont, gameOverTextColor);
 	gameOverTimer = 0;
 
 	countdownStrs[0] = "Ready?";
 	countdownStrs[1] = "Go!";
 	countdownFont = TTF_OpenFont("./font/consolab.ttf", 32);
-	countdownTextColor = { 0, 0, 0, 0 };
+	countdownTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	for (int i = 0; i < 2; i++) {
 		countdownTextures[i].loadFromText(countdownStrs[i], countdownFont, countdownTextColor);
 	}
@@ -50,7 +50,7 @@ UI::UI(Playfield* p) {
 
 	allClearStr = "All Clear!";
 	allClearFont = TTF_OpenFont("./font/consolab.ttf", 32);
-	allClearTextColor = { 0, 0, 0, 0 };
+	allClearTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	allClearTexture.loadFromText(allClearStr, allClearFont, allClearTextColor);
 	allClearTimer = ALL_CLEAR_DISPLAY_TIME;
 }

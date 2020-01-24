@@ -95,7 +95,7 @@ void Playfield::renderPlayfield() {
 	SDL_RenderSetClipRect(gRenderer, &playfieldClip);
 	//Render gridlines (2 px thickness for symmetry)
 	//Horizontal
-	SDL_SetRenderDrawColor(gRenderer, 0xb0, 0xb0, 0xb0, 0xFF); //light gray
+	SDL_SetRenderDrawColor(gRenderer, 0x40, 0x40, 0x40, 0xFF); //light gray
 	for (int i = 0; i <= FIELD_HEIGHT; i++) {
 		SDL_RenderDrawLine(gRenderer, x, y + (32 * i), x + (32 * FIELD_WIDTH), y + (32 * i));
 		SDL_RenderDrawLine(gRenderer, x, y + (32 * i) - 1, x + (32 * FIELD_WIDTH), y + (32 * i) - 1);
@@ -107,7 +107,7 @@ void Playfield::renderPlayfield() {
 	}
 
 	//8 px border
-	SDL_SetRenderDrawColor(gRenderer, 0x40, 0x40, 0x40, 0xFF); //dark gray
+	SDL_SetRenderDrawColor(gRenderer, 0xb0, 0xb0, 0xb0, 0xFF); //dark gray
 	for (int i = 0; i < 8; i++) {
 		SDL_RenderDrawLine(gRenderer, x - 9, y - 9 + i,
 			x + (32 * FIELD_WIDTH) + 8, y - 9 + i); //top

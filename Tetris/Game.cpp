@@ -109,7 +109,7 @@ void Game::update() {
 	ui1->render();
 
 	//Update screen
-	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(gRenderer, 0x20, 0x20, 0x20, 0xFF);
 	SDL_RenderPresent(gRenderer);
 
 	prevFrame = curFrame; //update frame count
