@@ -79,8 +79,8 @@ private:
 	SDL_Color gameOverTextColor;
 	int gameOverTimer; //displays text after GAME_OVER_TEXT_DELAY
 
-	Texture countdownTextures[5];
-	std::string countdownStrs[5];
+	Texture countdownTextures[2];
+	std::string countdownStrs[2];
 	TTF_Font* countdownFont;
 	SDL_Color countdownTextColor;
 	int countdownStage;

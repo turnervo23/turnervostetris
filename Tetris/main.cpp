@@ -8,7 +8,6 @@ Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left?
-- Redo "ready 3 2 1 go" to just "ready go". Current way wastes a bunch of time
 - Redo menu - don't make it separate from the "game". Not planning on adding more complexity
 - Restart/return to menu on game over
 - Redo colors - make it more of a "dark theme"

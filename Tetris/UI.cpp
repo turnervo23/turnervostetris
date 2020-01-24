@@ -38,14 +38,11 @@ UI::UI(Playfield* p) {
 	gameOverTexture.loadFromText(gameOverStr, gameOverFont, gameOverTextColor);
 	gameOverTimer = 0;
 
-	countdownStrs[0] = "READY";
-	countdownStrs[1] = "3";
-	countdownStrs[2] = "2";
-	countdownStrs[3] = "1";
-	countdownStrs[4] = "GO";
+	countdownStrs[0] = "Ready?";
+	countdownStrs[1] = "Go!";
 	countdownFont = TTF_OpenFont("./font/consolab.ttf", 32);
 	countdownTextColor = { 0, 0, 0, 0 };
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		countdownTextures[i].loadFromText(countdownStrs[i], countdownFont, countdownTextColor);
 	}
 	countdownStage = 0;
@@ -72,7 +69,7 @@ void UI::render() {
 	if (gameOverTimer >= GAME_OVER_TEXT_DELAY) {
 		renderGameOver();
 	}
-	if (countdownStage <= 4) {
+	if (countdownStage <= 1) {
 		renderCountdown();
 	}
 	if (allClearTimer < ALL_CLEAR_DISPLAY_TIME) {
@@ -130,7 +127,7 @@ void UI::update() {
 			countdownTimer = 0;
 		}
 
-		if (countdownStage > 4) { //countdown finished, start gameplay
+		if (countdownStage > 1) { //countdown finished, start gameplay
 			playfield->startGame();
 		}
 	}
