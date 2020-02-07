@@ -11,8 +11,12 @@ class UI;
 
 class Game {
 public:
-	Game();
-	~Game();
+	Game(); //just calls init
+	~Game(); //just calls end
+	//The reason I have these functions is so I can delete playfield, player, etc
+	//without deleting the Game
+	void init();
+	void end();
 	void update();
 	bool quitting();
 	int getCurFrame();

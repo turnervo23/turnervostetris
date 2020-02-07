@@ -29,6 +29,7 @@ const int GAME_OVER_TEXT_DELAY = 60;
 const int CLEAR_TYPE_DISPLAY_TIME = 120;
 const int COUNTDOWN_FRAMES_PER_STAGE = 60;
 const int ALL_CLEAR_DISPLAY_TIME = 120;
+const int GAME_OVER_MENU_DELAY = 300;
 
 const int NO_BLOCK = -1;
 enum BlockTypes {

@@ -7,28 +7,26 @@ The first finished version should have at least:
 Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
-What's left?
-- Redo menu - don't make it separate from the "game". Not planning on adding more complexity
-- Restart/return to menu on game over
-- Redo colors - make it more of a "dark theme"
-- Pause menu with resume/restart/return to menu
-- Turn off automatic key repeating (rotate, hard drop, etc)
-- Refine debug options - click to create block, pause block drop, respawn block
-- A README for GitHub
+What's left? (FINAL)
+- Redo menu colors to match game
+- Display controls in-game
+- Fix next piece bug (see below)
+- (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
+- (maybe?) Refine debug options - click to create block, pause block drop, respawn block
+- a README for GitHub
 
-[OLD] What's next on the agenda?
-- All/perfect clear recognition
-- Change autorepeat delay to a constant
-- Pause menu in game that allows you to return to main menu
+Extra:
+- Redo menu - don't make it separate from the "game". Not planning on adding more complexity
+- Pause menu with resume/restart/return to menu
+- Change autorepeat delay/speed to constants
 - Sound effects + music
 - Customizable controls
-- Turn off automatic key repeating
 - High scores
 - Work my way through the Tetris Guideline and make sure everything is implemented.
 https://tetris.fandom.com/wiki/Tetris_Guideline
 
 Known bugs:
-- Line clear flash has inconsistent speed. Tied to framerate issues?
+- Line clear flash appears to have inconsistent speed. Framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
 - The next piece appears at the top before end of line clear/start of game
 */

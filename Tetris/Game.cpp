@@ -4,9 +4,20 @@
 #include "UI.h"
 
 extern SDL_Renderer* gRenderer;
+extern int gGameState;
 
 //Constructor
 Game::Game() {
+	init();
+}
+
+//Destructor
+Game::~Game() {
+	end();
+}
+
+//Initialization
+void Game::init() {
 	playfield1 = new Playfield(this);
 	player1 = new Player(playfield1);
 	ui1 = new UI(playfield1);
@@ -18,8 +29,8 @@ Game::Game() {
 	prevFrame = -1;
 }
 
-//Destructor
-Game::~Game() {
+//End of game (frees up memory)
+void Game::end() {
 	delete playfield1;
 	delete player1;
 	delete ui1;
@@ -95,7 +106,7 @@ void Game::update() {
 		}
 
 		//Update objects
-		//playfield1->update();
+		playfield1->update();
 		player1->update();
 		ui1->update();
 	}
@@ -113,6 +124,13 @@ void Game::update() {
 	SDL_RenderPresent(gRenderer);
 
 	prevFrame = curFrame; //update frame count
+
+	//Return to menu after GAME_OVER_MENU_DELAY
+	if (playfield1->returnToMenu()) {
+		gGameState = MENU;
+		end();
+		init(); //starts a new game preemptively
+	}
 }
 
 //Returns true if user has quit the game

@@ -28,6 +28,7 @@ public:
 	void render(); //called once per frame processing loop
 	void startGame();
 	void endGame(); //only public for debug
+	bool returnToMenu();
 private:
 	void renderPlayfield();
 	void renderBlocks();
@@ -64,6 +65,7 @@ private:
 	//suspended game states
 	bool gameOver;
 	bool countdown;
+	int gameOverMenuTimer; //frames until return to menu on game over
 
 	SDL_Rect playfieldClip; //clipRect for playfield
 	SDL_Rect nextBlockClip; //clipRect for next piece display

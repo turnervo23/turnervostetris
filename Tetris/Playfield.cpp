@@ -38,6 +38,7 @@ Playfield::Playfield(Game *g) {
 	suspended = true;
 	countdown = true;
 	gameOver = false;
+	gameOverMenuTimer = 0;
 
 	lineClearing = false;
 	for (int r = 0; r < FIELD_HEIGHT; r++) {
@@ -138,6 +139,9 @@ void Playfield::update() {
 		checkLineClear();
 	}
 	*/
+	if (gameOver) {
+		gameOverMenuTimer++;
+	}
 }
 
 //Clear any lines made. Called after a block is landed.
@@ -342,6 +346,7 @@ void Playfield::startGame() {
 void Playfield::endGame() {
 	suspended = true;
 	gameOver = true;
+	gameOverMenuTimer = 0;
 }
 
 //Render the lock flash texture at the block locations of the recently landed piece
@@ -402,4 +407,9 @@ void Playfield::setTextureColorByBlockType(Texture &texture, int blockType) {
 	}
 
 	texture.setColor(r, g, b);
+}
+
+//Checked by Game to return to menu once gameOverMenuTimer is up
+bool Playfield::returnToMenu() {
+	return (gameOverMenuTimer > GAME_OVER_MENU_DELAY);
 }
