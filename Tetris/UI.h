@@ -37,11 +37,14 @@ private:
 	void renderGameOver();
 	void renderCountdown();
 	void renderAllClear();
+	void renderGameControls();
 
 	Playfield* playfield;
 
 	int startTime; //SDL ticks at start
 	int time; //SDL ticks
+
+	//Should really put this stuff in a class called UIText or something
 	Texture timeTexture;
 	std::string timeStr; //formatted min:sec:ms
 	TTF_Font* timeFont;
@@ -91,6 +94,11 @@ private:
 	TTF_Font* allClearFont;
 	SDL_Color allClearTextColor;
 	int allClearTimer;
+
+	Texture gameControlsTexture;
+	std::string gameControlsStr;
+	TTF_Font* gameControlsFont;
+	SDL_Color gameControlsTextColor;
 };
 
 #endif
