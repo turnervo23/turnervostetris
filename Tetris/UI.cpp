@@ -237,7 +237,7 @@ void UI::setClearType(std::string ct) {
 //Renders the clear type (only called after recent clear)
 void UI::renderClearType() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	clearTypeTexture.render(playfield->x - 150, playfield->y + 228);
+	clearTypeTexture.render(playfield->x - 150, playfield->y + 244);
 }
 
 //Sets the combo value
@@ -249,7 +249,7 @@ void UI::setCombo(int c) {
 //Renders the combo value
 void UI::renderCombo() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	comboTexture.render(playfield->x - 150, playfield->y + 276);
+	comboTexture.render(playfield->x - 150, playfield->y + 292);
 }
 
 //Sets the "All Clear" status

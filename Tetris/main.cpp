@@ -8,12 +8,12 @@ Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left? (FINAL)
-- UI boxes for hold/next pieces
+- Make debug mode activatable with a button press on menu
 - (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
-- (maybe?) Refine debug options - click to create block, pause block drop, respawn block
 - a README for GitHub
 
 Extra:
+- Refine debug options - click to create block, pause block drop, respawn block
 - Redo menu - don't make it separate from the "game". Not planning on adding more complexity
 - Pause menu with resume/restart/return to menu
 - Change autorepeat delay/speed to constants

@@ -622,7 +622,9 @@ void Player::landBlock() {
 			blocksAboveVisibleField += 1;
 		}
 	}
-	render(); //render again. otherwise there's 1 frame of it missing
+
+	//I think this caused the screen flash bug
+	//render(); //render again. otherwise there's 1 frame of it missing
 
 	//Land successful
 	if (blocksAboveVisibleField < NUM_PLAYER_BLOCKS) {
