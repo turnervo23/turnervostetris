@@ -1,5 +1,5 @@
 /*
-Xtvo's Tetris:
+Turner Vo's Tetris:
 My goal is to make a fully functional Tetris clone using SDL in C++.
 The first finished version should have at least:
 - Main menu
@@ -9,6 +9,7 @@ Then I can start adding more stuff if I want.
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left? (FINAL)
 - Fix next piece bug (see below)
+- UI boxes for hold/next pieces
 - (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
 - (maybe?) Refine debug options - click to create block, pause block drop, respawn block
 - a README for GitHub

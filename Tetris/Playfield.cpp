@@ -324,6 +324,7 @@ void Playfield::renderLineClear() {
 		}
 		lineClearing = false;
 		suspended = false;
+		player->startDrop(); //this should NOT be placed in a "render" function
 	}
 	else if ((lineClearCurFrame - lineClearStartFrame) % LINE_CLEAR_FLASH_FREQ == 0) { //render flash every 4 frames
 		for (int r = 0; r < FIELD_HEIGHT; r++) {
@@ -340,6 +341,7 @@ void Playfield::startGame() {
 	suspended = false;
 	countdown = false;
 	ui->setStartTime(SDL_GetTicks());
+	player->startDrop();
 }
 
 //Ends the game, suspending gameplay indefinitely (later: until menu selection by player)

@@ -30,7 +30,8 @@ Player::Player(Playfield* p) {
 	tstTwist = false;
 
 	//Temporary. Starts drop upon creation
-	startDrop();
+	//startDrop();
+	//startDrop() is now called by playfield->startGame()
 }
 
 //Spawn player block at top of the screen as "next" piece
@@ -229,10 +230,12 @@ void Player::hardDrop() {
 
 //Call all rendering functions
 void Player::render() {
-	renderPlayer();
+	if (!playfield->countdown) {
+		renderPlayer();
+		renderGhostBlock();
+	}
 	renderNextBlocks();
 	renderHeldBlock();
-	renderGhostBlock();
 }
 
 //Render player's blocks
@@ -627,7 +630,11 @@ void Player::landBlock() {
 		//Check for line clear
 		playfield->checkLineClear();
 
-		startDrop(); //start next drop
+		//If no line was cleared, start next drop.
+		//Otherwise drop is started by playfield->renderLineClear()
+		if (!playfield->lineClearing) {
+			startDrop();
+		}
 	}
 	else {
 		playfield->endGame(); //player locked out, end game
