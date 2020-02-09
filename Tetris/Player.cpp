@@ -230,7 +230,7 @@ void Player::hardDrop() {
 
 //Call all rendering functions
 void Player::render() {
-	if (!playfield->countdown) {
+	if (!playfield->countdown && !playfield->gameOver) {
 		renderPlayer();
 		renderGhostBlock();
 	}
@@ -498,7 +498,7 @@ void Player::renderNextBlocks() {
 	setOrientation(orientation);
 	for (int j = 0; j < NUM_PLAYER_BLOCKS; j++) {
 		playfield->textures[needed[0]].render(playfield->x + (32 * FIELD_WIDTH) + (24 * blockCoords[j][0]) + 56,
-			                                  playfield->y + (24 * blockCoords[j][1]) + 40,
+			                                  playfield->y + (24 * blockCoords[j][1]) + 56,
 			                                  24, 24);
 	}
 
@@ -508,7 +508,7 @@ void Player::renderNextBlocks() {
 		setOrientation(orientation);
 		for (int j = 0; j < NUM_PLAYER_BLOCKS; j++) {
 			playfield->textures[needed[i]].render(playfield->x + (32 * FIELD_WIDTH) + (16 * blockCoords[j][0]) + 56,
-				                                  playfield->y + (16 * blockCoords[j][1]) + 56 + (48 * i),
+				                                  playfield->y + (16 * blockCoords[j][1]) + 72 + (48 * i),
 				                                  16, 16);
 		}
 	}
@@ -517,6 +517,24 @@ void Player::renderNextBlocks() {
 	type = savedType;
 	orientation = savedOri;
 	setOrientation(orientation);
+
+	//Draw 8 px box around next piece (shouldn't really be in this class)
+	SDL_SetRenderDrawColor(gRenderer, 0xb0, 0xb0, 0xb0, 0xFF); //light gray
+	for (int i = 0; i < 8; i++) {
+		SDL_RenderDrawLine(gRenderer, playfield->x + (32 * FIELD_WIDTH),
+			                          playfield->y - 8 + i,
+			                          playfield->x + (32 * FIELD_WIDTH) + 152,
+			                          playfield->y - 8 + i); //top
+		SDL_RenderDrawLine(gRenderer, playfield->x + (32 * FIELD_WIDTH),
+			                          playfield->y + 360 + i,
+			                          playfield->x + (32 * FIELD_WIDTH) + 152,
+			                          playfield->y + 360 + i); //bottom
+		SDL_RenderDrawLine(gRenderer, playfield->x + (32 * FIELD_WIDTH) + 152 - i,
+			                          playfield->y - 8,
+			                          playfield->x + (32 * FIELD_WIDTH) + 152 - i,
+			                          playfield->y + 360); //right
+	}
+	//"NEXT" text is rendered by UI function. Too much of a hassle to introduce another text object here
 }
 
 //Render the held piece, to the left of top of playfield

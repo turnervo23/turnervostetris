@@ -58,6 +58,11 @@ UI::UI(Playfield* p) {
 	gameControlsFont = TTF_OpenFont("./font/consola.ttf", 12);
 	gameControlsTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	gameControlsTexture.loadFromText(gameControlsStr, gameControlsFont, gameControlsTextColor);
+
+	nextPieceStr = "NEXT";
+	nextPieceFont = TTF_OpenFont("./font/consola.ttf", 16);
+	nextPieceTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
+	nextPieceTexture.loadFromText(nextPieceStr, nextPieceFont, nextPieceTextColor);
 }
 
 void UI::render() {
@@ -66,6 +71,7 @@ void UI::render() {
 	renderLevel();
 	renderLines();
 	renderGameControls();
+	renderNextPieceText();
 	if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 		renderClearType();
 	}
@@ -257,5 +263,11 @@ void UI::renderAllClear() {
 //Renders the game controls in the corner (should be moved to an options menu later)
 void UI::renderGameControls() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	gameControlsTexture.render(playfield->x + 360, playfield->y + 500);
+	gameControlsTexture.render(playfield->x + 350, playfield->y + 500);
+}
+
+//Renders the "NEXT" text in next piece box
+void UI::renderNextPieceText() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	nextPieceTexture.render(playfield->x + (32 * FIELD_WIDTH) + 16, playfield->y + 8);
 }

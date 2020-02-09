@@ -38,6 +38,7 @@ private:
 	void renderCountdown();
 	void renderAllClear();
 	void renderGameControls();
+	void renderNextPieceText();
 
 	Playfield* playfield;
 
@@ -99,6 +100,11 @@ private:
 	std::string gameControlsStr;
 	TTF_Font* gameControlsFont;
 	SDL_Color gameControlsTextColor;
+
+	Texture nextPieceTexture;
+	std::string nextPieceStr;
+	TTF_Font* nextPieceFont;
+	SDL_Color nextPieceTextColor;
 };
 
 #endif

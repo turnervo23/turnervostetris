@@ -8,7 +8,6 @@ Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left? (FINAL)
-- Fix next piece bug (see below)
 - UI boxes for hold/next pieces
 - (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
 - (maybe?) Refine debug options - click to create block, pause block drop, respawn block
@@ -27,7 +26,7 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 Known bugs:
 - Line clear flash appears to have inconsistent speed. Framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
-- The next piece appears at the top before end of line clear/start of game
+- Once saw the screen flash white for one frame every time I placed a block. Only lasted a couple seconds. Never been able to recreate it.
 */
 
 #include <SDL.h>
