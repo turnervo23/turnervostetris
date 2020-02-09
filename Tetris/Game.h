@@ -31,6 +31,7 @@ private:
 	SDL_Event event; //keyboard input
 	int curFrame; //current frame
 	int prevFrame; //previous frame
+	bool debug; //whether debug mode is enabled or not
 };
 
 #endif

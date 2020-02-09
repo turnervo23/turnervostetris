@@ -8,7 +8,6 @@ Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left? (FINAL)
-- Make debug mode activatable with a button press on menu
 - (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
 - a README for GitHub
 

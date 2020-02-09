@@ -27,6 +27,7 @@ void Game::init() {
 	quit = false;
 	curFrame = -1;
 	prevFrame = -1;
+	debug = false;
 }
 
 //End of game (frees up memory)
@@ -76,15 +77,19 @@ void Game::update() {
 				case SDLK_LSHIFT:
 					player1->holdBlock();
 					break;
-				//debug only, remove in finished version
+				//debug
+				case SDLK_F3:
+					debug = true;
+					ui1->setDebug();
+					break;
 				case SDLK_c:
-					player1->_debug_cyclePiece();
+					if (debug) { player1->_debug_cyclePiece(); }
 					break;
 				case SDLK_v:
-					player1->startDrop();
+					if (debug) { player1->startDrop(); }
 					break;
 				case SDLK_b:
-					player1->_debug_clearPlayfield();
+					if (debug) { player1->_debug_clearPlayfield(); }
 					break;
 				}
 			}

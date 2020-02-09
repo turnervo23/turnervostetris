@@ -25,6 +25,7 @@ public:
 	void setClearType(std::string ct);
 	void setCombo(int c);
 	void setAllClear();
+	void setDebug();
 	void update();
 	void render();
 private:
@@ -40,6 +41,7 @@ private:
 	void renderGameControls();
 	void renderNextPieceText();
 	void renderHoldText();
+	void renderDebugControls();
 
 	Playfield* playfield;
 
@@ -111,6 +113,12 @@ private:
 	std::string holdStr;
 	TTF_Font* holdFont;
 	SDL_Color holdTextColor;
+
+	bool debug; //whether debug mode is enabled or not
+	Texture debugControlsTexture;
+	std::string debugControlsStr;
+	TTF_Font* debugControlsFont;
+	SDL_Color debugControlsTextColor;
 };
 
 #endif

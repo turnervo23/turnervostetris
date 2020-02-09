@@ -68,6 +68,12 @@ UI::UI(Playfield* p) {
 	holdFont = TTF_OpenFont("./font/consola.ttf", 16);
 	holdTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	holdTexture.loadFromText(holdStr, holdFont, holdTextColor);
+
+	debug = false;
+	debugControlsStr = "[Debug]\nChange Block: C\nNext Block: V\nClear Playfield: B";
+	debugControlsFont = TTF_OpenFont("./font/consola.ttf", 12);
+	debugControlsTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
+	debugControlsTexture.loadFromText(debugControlsStr, debugControlsFont, debugControlsTextColor);
 }
 
 void UI::render() {
@@ -92,6 +98,9 @@ void UI::render() {
 	}
 	if (allClearTimer < ALL_CLEAR_DISPLAY_TIME) {
 		renderAllClear();
+	}
+	if (debug) {
+		renderDebugControls();
 	}
 }
 
@@ -269,7 +278,7 @@ void UI::renderAllClear() {
 //Renders the game controls in the corner (should be moved to an options menu later)
 void UI::renderGameControls() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	gameControlsTexture.render(playfield->x + 350, playfield->y + 500);
+	gameControlsTexture.render(playfield->x + 350, playfield->y + 450);
 }
 
 //Renders the "NEXT" text in next piece box
@@ -282,4 +291,15 @@ void UI::renderNextPieceText() {
 void UI::renderHoldText() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	holdTexture.render(playfield->x - 136, playfield->y + 8);
+}
+
+//Renders the debug controls in the corner
+void UI::renderDebugControls() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	debugControlsTexture.render(playfield->x + 350, playfield->y + 550);
+}
+
+//Tells UI to render debug controls
+void UI::setDebug() {
+	debug = true;
 }

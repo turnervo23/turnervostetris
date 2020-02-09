@@ -623,7 +623,7 @@ void Player::landBlock() {
 		}
 	}
 
-	//I think this caused the screen flash bug
+	//I think this caused the screen flash bug. Seems to work fine without this line now
 	//render(); //render again. otherwise there's 1 frame of it missing
 
 	//Land successful
