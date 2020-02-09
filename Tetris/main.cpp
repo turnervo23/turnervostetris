@@ -1,17 +1,18 @@
 /*
 Turner Vo's Tetris:
-My goal is to make a fully functional Tetris clone using SDL in C++.
-The first finished version should have at least:
-- Main menu
-- Endless mode (aka Marathon) with dynamic speed levels and scoring.
-Then I can start adding more stuff if I want.
+This program is a fully functional Tetris clone using SDL in C++. It features
+an endless mode with dynamic speed levels and scoring (more modes might be
+added later). It adheres (mostly) to the "Tetris Guideline" specified here:
+https://harddrop.com/wiki/Tetris_Guideline
+But please note that I am NOT trying to pass this off as an official Tetris
+game. This is just a personal project, please don't sue me.
 
-New goal: publish a finished version within the next 3 weeks. Stop feature creep
-What's left? (FINAL)
-- (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
+Developer notes:
+What's left?
 - a README for GitHub
 
 Extra:
+- Turn off automatic key repeating (rotate, hard drop, etc)
 - Refine debug options - click to create block, pause block drop, respawn block
 - Redo menu - don't make it separate from the "game". Not planning on adding more complexity
 - Pause menu with resume/restart/return to menu
@@ -25,8 +26,6 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 Known bugs:
 - Line clear flash appears to have inconsistent speed. Framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
-- MAJOR BUG: Sometimes the screen flashes white for one frame when a block lands.
-Seems to only happen sometimes. No idea what causes it, but it's super jarring and needs to be fixed ASAP
 */
 
 #include <SDL.h>
