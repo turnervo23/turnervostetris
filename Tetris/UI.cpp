@@ -63,6 +63,11 @@ UI::UI(Playfield* p) {
 	nextPieceFont = TTF_OpenFont("./font/consola.ttf", 16);
 	nextPieceTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	nextPieceTexture.loadFromText(nextPieceStr, nextPieceFont, nextPieceTextColor);
+
+	holdStr = "HOLD";
+	holdFont = TTF_OpenFont("./font/consola.ttf", 16);
+	holdTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
+	holdTexture.loadFromText(holdStr, holdFont, holdTextColor);
 }
 
 void UI::render() {
@@ -72,6 +77,7 @@ void UI::render() {
 	renderLines();
 	renderGameControls();
 	renderNextPieceText();
+	renderHoldText();
 	if (clearTypeTimer < CLEAR_TYPE_DISPLAY_TIME) {
 		renderClearType();
 	}
@@ -125,7 +131,7 @@ void UI::setTime(int t) {
 
 void UI::renderTime() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	timeTexture.render(playfield->x - 150, playfield->y + 100);
+	timeTexture.render(playfield->x - 150, playfield->y + 116);
 }
 
 //Update function, called once per frame
@@ -194,7 +200,7 @@ void UI::setScore(int s) {
 //Renders the score
 void UI::renderScore() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	scoreTexture.render(playfield->x - 150, playfield->y + 132);
+	scoreTexture.render(playfield->x - 150, playfield->y + 148);
 }
 
 //Sets the player level. Obtained from this->playfield->player
@@ -206,7 +212,7 @@ void UI::setLevel(int l) {
 //Renders the player level
 void UI::renderLevel() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	levelTexture.render(playfield->x - 150, playfield->y + 164);
+	levelTexture.render(playfield->x - 150, playfield->y + 180);
 }
 
 //Sets the number of lines cleared. Obtained from this->playfield->player
@@ -218,7 +224,7 @@ void UI::setLines(int l) {
 //Renders the number of lines cleared
 void UI::renderLines() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	linesTexture.render(playfield->x - 150, playfield->y + 196);
+	linesTexture.render(playfield->x - 150, playfield->y + 212);
 }
 
 //Sets the "clear type" (i.e. single, double, tetris, t-spin)
@@ -270,4 +276,10 @@ void UI::renderGameControls() {
 void UI::renderNextPieceText() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	nextPieceTexture.render(playfield->x + (32 * FIELD_WIDTH) + 16, playfield->y + 8);
+}
+
+//Renders the "HOLD" text in held piece box
+void UI::renderHoldText() {
+	SDL_RenderSetClipRect(gRenderer, NULL);
+	holdTexture.render(playfield->x - 136, playfield->y + 8);
 }

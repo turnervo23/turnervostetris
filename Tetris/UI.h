@@ -39,6 +39,7 @@ private:
 	void renderAllClear();
 	void renderGameControls();
 	void renderNextPieceText();
+	void renderHoldText();
 
 	Playfield* playfield;
 
@@ -105,6 +106,11 @@ private:
 	std::string nextPieceStr;
 	TTF_Font* nextPieceFont;
 	SDL_Color nextPieceTextColor;
+
+	Texture holdTexture;
+	std::string holdStr;
+	TTF_Font* holdFont;
+	SDL_Color holdTextColor;
 };
 
 #endif

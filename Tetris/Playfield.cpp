@@ -33,7 +33,7 @@ Playfield::Playfield(Game *g) {
 	heldBlockClip.x = x - 8 - 160;
 	heldBlockClip.y = y - 8;
 	heldBlockClip.w = 160;
-	heldBlockClip.h = 72;
+	heldBlockClip.h = 112;
 
 	suspended = true;
 	countdown = true;

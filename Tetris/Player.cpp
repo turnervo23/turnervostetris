@@ -539,37 +539,53 @@ void Player::renderNextBlocks() {
 
 //Render the held piece, to the left of top of playfield
 void Player::renderHeldBlock() {
-	//skip if no held block
-	if (heldBlock == -1) {
-		return;
-	}
-
-	//Using player's blockCoords, type, and orientation temporarily to render the held block.
-	//These variables save those values so we can set them back at the end
-	int savedType = type;
-	int savedOri = orientation;
-
 	SDL_RenderSetClipRect(gRenderer, &playfield->heldBlockClip);
-	
-	//Gray out if hold used already
-	if (holdUsed) {
-		playfield->textures[heldBlock].setColor(127, 127, 127);
-	}
-	orientation = 0;
-	//Rendered 3/4 size
-	type = heldBlock;
-	setOrientation(orientation);
-	for (int j = 0; j < NUM_PLAYER_BLOCKS; j++) {
-		playfield->textures[heldBlock].render(playfield->x + (24 * blockCoords[j][0]) - 104,
-			                                  playfield->y + (24 * blockCoords[j][1]) + 40,
-			                                  24, 24);
-	}
 
-	//Returning player vars to orig values
-	playfield->setTextureColorByBlockType(playfield->textures[heldBlock], heldBlock);
-	type = savedType;
-	orientation = savedOri;
-	setOrientation(orientation);
+	//Only render the block itself if there is one. Crashes otherwise
+	if (heldBlock != -1) {
+		//Using player's blockCoords, type, and orientation temporarily to render the held block.
+		//These variables save those values so we can set them back at the end
+		int savedType = type;
+		int savedOri = orientation;
+
+		//Gray out if hold used already
+		if (holdUsed) {
+			playfield->textures[heldBlock].setColor(127, 127, 127);
+		}
+		orientation = 0;
+		//Rendered 3/4 size
+		type = heldBlock;
+		setOrientation(orientation);
+		for (int j = 0; j < NUM_PLAYER_BLOCKS; j++) {
+			playfield->textures[heldBlock].render(playfield->x + (24 * blockCoords[j][0]) - 104,
+				playfield->y + (24 * blockCoords[j][1]) + 64,
+				24, 24);
+		}
+
+		//Returning player vars to orig values
+		playfield->setTextureColorByBlockType(playfield->textures[heldBlock], heldBlock);
+		type = savedType;
+		orientation = savedOri;
+		setOrientation(orientation);
+	}
+	
+	//Draw 8 px box around held piece (shouldn't really be in this class)
+	SDL_SetRenderDrawColor(gRenderer, 0xb0, 0xb0, 0xb0, 0xFF); //light gray
+	for (int i = 0; i < 8; i++) {
+		SDL_RenderDrawLine(gRenderer, playfield->x,
+			                          playfield->y - 8 + i,
+			                          playfield->x - 152,
+			                          playfield->y - 8 + i); //top
+		SDL_RenderDrawLine(gRenderer, playfield->x,
+			                          playfield->y + 96 + i,
+			                          playfield->x - 152,
+			                          playfield->y + 96 + i); //bottom
+		SDL_RenderDrawLine(gRenderer, playfield->x - 152 + i,
+			                          playfield->y - 8,
+			                          playfield->x - 152 + i,
+			                          playfield->y + 96); //left
+	}
+	//"HOLD" text is rendered by UI function. Too much of a hassle to introduce another text object here
 }
 
 //Returns true if at least one of the player's blocks is directly above a playfield block or the bottom of the playfield

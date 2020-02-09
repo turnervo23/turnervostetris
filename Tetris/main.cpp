@@ -26,7 +26,8 @@ https://tetris.fandom.com/wiki/Tetris_Guideline
 Known bugs:
 - Line clear flash appears to have inconsistent speed. Framerate issues?
 - Points added for soft/hard dropping don't cap at 20/40. Would be an easy implement but doesn't seem like that big an issue.
-- Once saw the screen flash white for one frame every time I placed a block. Only lasted a couple seconds. Never been able to recreate it.
+- MAJOR BUG: Sometimes the screen flashes white for one frame when a block lands.
+Seems to only happen sometimes. No idea what causes it, but it's super jarring and needs to be fixed ASAP
 */
 
 #include <SDL.h>
