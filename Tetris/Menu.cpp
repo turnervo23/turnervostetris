@@ -7,21 +7,21 @@ Menu::Menu() {
 	menuOptionStrs[0] = "Play";
 	menuOptionStrs[1] = "Quit";
 	menuOptionFont = TTF_OpenFont("./font/consola.ttf", 32);
-	menuOptionTextColor = { 0, 0, 0, 0 };
+	menuOptionTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	for (int i = 0; i < NUM_MENU_OPTIONS; i++) {
 		menuOptionTextures[i].loadFromText(menuOptionStrs[i], menuOptionFont, menuOptionTextColor);
 	}
 
-	titleStr = "Xtvo's Tetris";
+	titleStr = "Turner Vo's\nTetris";
 	titleFont = TTF_OpenFont("./font/consolab.ttf", 64);
-	titleTextColor = { 0, 0, 0, 0 };
+	titleTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	titleTexture.loadFromText(titleStr, titleFont, titleTextColor);
 
 	cursorTexture.loadFromFile("./img/menuCursor.png");
 
 	menuControlsStr = "Navigate: Up/Down | Select: Enter";
 	menuControlsFont = TTF_OpenFont("./font/consola.ttf", 16);
-	menuControlsTextColor = { 0, 0, 0, 0 };
+	menuControlsTextColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 	menuControlsTexture.loadFromText(menuControlsStr, menuControlsFont, menuControlsTextColor);
 
 	activeMenu = MAIN;
@@ -66,7 +66,7 @@ void Menu::update() {
 	render();
 
 	//Update screen
-	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(gRenderer, 0x20, 0x20, 0x20, 0xFF);
 	SDL_RenderPresent(gRenderer);
 }
 
@@ -80,7 +80,7 @@ void Menu::render() {
 void Menu::renderMenuOptions() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
 	for (int i = 0; i < NUM_MENU_OPTIONS; i++) {
-		menuOptionTextures[i].render(100, 200 + 50*i);
+		menuOptionTextures[i].render(100, 300 + 50*i);
 	}
 }
 
@@ -91,7 +91,7 @@ void Menu::renderTitle() {
 
 void Menu::renderCursor() {
 	SDL_RenderSetClipRect(gRenderer, NULL);
-	cursorTexture.render(60, 200 + 50*highlightedOption); //renders to the left of highlighted menu option
+	cursorTexture.render(60, 300 + 50*highlightedOption); //renders to the left of highlighted menu option
 }
 
 void Menu::renderMenuControls() {

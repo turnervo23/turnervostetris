@@ -8,7 +8,6 @@ Then I can start adding more stuff if I want.
 
 New goal: publish a finished version within the next 3 weeks. Stop feature creep
 What's left? (FINAL)
-- Redo menu colors to match game
 - Display controls in-game
 - Fix next piece bug (see below)
 - (maybe?) Turn off automatic key repeating (rotate, hard drop, etc)
@@ -70,7 +69,7 @@ bool init() {
 	}
 
 	//Create window
-	gWindow = SDL_CreateWindow("Xtvo's Tetris", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	gWindow = SDL_CreateWindow("Turner Vo's Tetris", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (gWindow == NULL) {
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << "\n";
 		return false;
